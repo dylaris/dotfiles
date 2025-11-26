@@ -16,39 +16,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- Colorscheme
-    { "EdenEast/nightfox.nvim" },
-    { "pineapplegiant/spaceduck" },
     { "rebelot/kanagawa.nvim" },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-
-    { "kassio/neoterm" },
 
     -- Fuzzy search
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' },
-    },
-
-    -- Check keymap
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {},
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
     },
 
     -- Exacyly jump
@@ -102,11 +75,8 @@ require("lazy").setup({
         end
     },
 
-    -- Smooth scroll
-    {
-        "karb94/neoscroll.nvim",
-        opts = {}
-    },
+    -- Tagbar toggle
+    { "preservim/tagbar" },
 }, {
     git = {
         url_format = "https://gh.bugdey.us.kg/https://github.com/%s.git"

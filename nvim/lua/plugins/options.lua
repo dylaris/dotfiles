@@ -24,7 +24,7 @@ require("oil").setup({
       ["J"] = { "actions.select", mode = "n" },     -- open file or enter directory
       ["K"] = { "actions.parent", mode = "n" },     -- go back to parent directory
       ["H"] = { "actions.open_cwd", mode = "n" },   -- open the current working directory
-      ["L"] = { "actions.refresh", mode = "n" },    -- open the current working directory
+      ["L"] = { "actions.refresh", mode = "n" },    -- Refresh oil buffer
       ["S"] = { "actions.cd", mode = "n" },         -- set current directory as working directory
       ["g."] = { "actions.toggle_hidden", mode = "n" },   -- switch to show hidden file
       ["gs"] = { "actions.change_sort", mode = "n" },     -- change sort method
@@ -61,39 +61,12 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
--- neoscroll
-require('neoscroll').setup({
-    mappings = {
-        '<C-u>', '<C-d>',
-        '<C-b>', '<C-f>',
-        'zt', 'zz', 'zb',
-    },
-})
-
--- neoterm
-vim.g.neoterm_default_mod = "botright"
-
--- nightfox
-require('nightfox').setup({
-    options = {
-        styles = {
-            comments = "NONE",
-            keywords = "bold",
-            types    = "bold",
-        }
-    },
-    groups = {
-        all = {
-            ["@variable.parameter"] = { fg = "#bdbdbd" , style = "NONE" },
-            -- ["@field"] = { fg = "#D1C4E9" },
-            -- ["@property"] = { fg = "#D1C4E9" },
-            -- ["@variable.member"] = { fg = "#D1C4E9" },
-        },
-    },
-})
-
 -- kanagawa
 require("kanagawa").setup{
+    background = {
+        dark = "dragon",
+        light = "lotus"
+    },
     commentStyle = { italic = false },
     keywordStyle = { italic = false },
     overrides = function(colors)
@@ -106,20 +79,3 @@ require("kanagawa").setup{
         }
     end,
 }
-
--- tokyonight
-require("tokyonight").setup{
-    style = "night", -- `moon`, `storm`, `night`, `day`
-    styles = {
-        comments = { italic = false },
-        keywords = { italic = false },
-    },
-}
-
--- catppuccin
-require("catppuccin").setup({
-    flavour = "mocha", -- latte, frappe, macchiato, mocha
-    no_italic = true,
-    show_end_of_buffer = true,
-})
-
