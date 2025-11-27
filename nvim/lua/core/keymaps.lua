@@ -4,12 +4,21 @@ vim.g.mapleader = " "
 -- core
 vim.keymap.set("i", "jk", "<esc>", {desc = "Exit insert mode"})
 vim.keymap.set("c", "jk", "<cr>", {desc = "Run command"})
+vim.keymap.set("n", "<leader>r", ":!", {desc = "Run external command"})
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
 vim.keymap.set("n", "<leader>r", ":!", {desc = "Run external command"})
 vim.keymap.set("n", "<leader>s", ":w<cr>", {desc = "Save file"})
 vim.keymap.set("n", "<leader>q", ":q<cr>", {desc = "Quit file"})
 vim.keymap.set("n", "<leader>nh", ":nohl<cr>", {desc = "Clear search highlight"})
 vim.keymap.set("v", "<tab>", ":normal @a<cr>", {desc = "Run macro 'a'"})
+
+-- quickfix
+vim.keymap.set("n", "<leader>co", ":copen<cr>", {desc = "Open quifix window"})
+vim.keymap.set("n", "<leader>cc", ":cclose<cr>", {desc = "Close quifix window"})
+vim.keymap.set("n", "<leader>cn", ":cnext<cr>", {desc = "Next fix"})
+vim.keymap.set("n", "<leader>cp", ":cprev<cr>", {desc = "Previous fix"})
+vim.keymap.set("n", "<leader>cf", ":cfirst<cr>", {desc = "First fix"})
+vim.keymap.set("n", "<leader>cl", ":clast<cr>", {desc = "Last fix"})
 
 -- line operations
 vim.keymap.set("n", "du", "d^", {desc = "Delete to line start"})

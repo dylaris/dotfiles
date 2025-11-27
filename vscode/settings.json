@@ -1,0 +1,126 @@
+{
+    // ssh
+    "remote.SSH.remotePlatform": {
+        "192.168.2.149": "linux"
+    },
+    // vim
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-p>": false,
+        "<C-a>": false,
+        "<C-f>": true,
+        "<C-b>": true,
+        "<C-d>": true,
+        "<C-u>": true,
+    },
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "j", "k" ],
+            "after": [ "<Esc>" ]
+        }
+    ],
+    "vim.commandLineModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "j", "k" ],
+            "after": [ "<cr>" ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "<leader>", "s" ],
+            "commands": [ ":w" ]
+        },
+        {
+            "before": [ "<leader>", "q" ],
+            "commands": [ ":q" ]
+        },
+        {
+            "before": [ "<leader>", "n", "h" ],
+            "commands": [ ":nohl" ]
+        },
+        {
+            "before": [ "<enter>" ],
+            "after": [ "i", "<cr>", "<esc>" ]
+        },
+        {
+            "before": [ "C-h" ],
+            "after": [ "^" ]
+        },
+        {
+            "before": [ "C-l" ],
+            "after": [ "$" ]
+        },
+        {
+            "before": ["g", "h"],  
+            "commands": [ "editor.action.showHover"]
+        },
+        {
+            "before": ["g", "r"],
+            "commands": ["editor.action.goToReferences"],
+        },
+        {
+            "before": ["g", "j"],
+            "commands": ["editor.action.revealDefinition"]
+        },
+        {
+            "before": ["g", "b"],
+            "commands": ["workbench.action.navigateBack"],
+        },
+        {
+            "before": ["g", "s"],
+            "commands": ["workbench.view.search"],
+        },
+        {
+            "before": ["leader", "e"],
+            "commands": ["workbench.explorer.fileView.focus"],
+        },
+        {
+            "before": ["leader", "c", "p"], 
+            "commands": ["editor.action.marker.prevInFiles"],
+        },
+        {
+            "before": ["leader", "c", "n"],
+            "commands": ["editor.action.marker.nextInFiles"],
+        },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "C-h" ],
+            "after": [ "^" ]
+        },
+        {
+            "before": [ "C-l" ],
+            "after": [ "$", "h" ]
+        },
+        {
+            "before": [ "<tab>" ],
+            "after": [ ":", "n", "o", "r", "m", " ", "@", "a", "<cr>" ]
+        }
+    ],
+
+    // extension
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "extensions.ignoreRecommendations": true,
+
+    // editor
+    "editor.lineNumbers":"relative",
+    "editor.smoothScrolling": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.fontFamily": "Consolas",
+    "editor.fontSize": 16,
+    "editor.fontWeight": "normal",
+
+    // workbench
+    "workbench.colorTheme": "Kanagawa",
+    "workbench.iconTheme": "material-icon-theme",
+
+    // other
+    "problems.visibility": false,
+}

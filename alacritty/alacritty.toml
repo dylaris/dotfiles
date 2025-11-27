@@ -1,12 +1,18 @@
-general.import = ["catppuccin-mocha.toml"]
+# general.import = ["catppuccin-mocha.toml"]
+# general.import = ["kanagawa-wave.toml"]
+general.import = ["kanagawa-dragon.toml"]
 
 [font]
 size = 12.0
-normal = { family = "CodeNewRoman Nerd Font", style = "Bold" }
-bold   = { family = "CodeNewRoman Nerd Font", style = "Bold" }
-italic = { family = "CodeNewRoman Nerd Font", style = "Italic" }
+# normal = { family = "BlexMono Nerd Font", style = "Regular" }
+# bold   = { family = "BlexMono Nerd Font", style = "Bold" }
+# italic = { family = "BlexMono Nerd Font", style = "Italic" }
+normal = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
+bold   = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
+italic = { family = "Inconsolata LGC Nerd Font", style = "Italic" }
 
 [window]
+decorations = "Full"
 padding = { x = 15, y = 10 }
 dynamic_title = false
 title = "Hello, World"
