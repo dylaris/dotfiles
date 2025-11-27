@@ -1,0 +1,58 @@
+[
+    {   // Rename file
+        "key": "r",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // New file
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // New folder
+        "key": "shift+a",
+        "command": "explorer.newFolder",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // Delete file
+        "key": "d",
+        "command": "deleteFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // Copy
+        "key": "y",
+        "command": "filesExplorer.copy",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // Cut
+        "key": "x",
+        "command": "filesExplorer.cut",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {   // Paste
+        "key": "p",
+        "command": "filesExplorer.paste",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+
+    {   // In global search, 'enter' to focus on search result
+        "key": "enter",
+        "command": "search.action.focusSearchList",
+        "when": "inSearchEditor && inputBoxFocus && hasSearchResult || inputBoxFocus && searchViewletVisible && hasSearchResult"
+    },
+    {   // In search result list, 'escape' to focus on global search input box
+        "key": "escape",
+        "command": "workbench.action.findInFiles",
+        "when": "searchViewletVisible && hasSearchResult && searchViewletFocus"
+    },
+    {   // In global search input box, 'escape' to focus on editor
+        "key": "escape",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "inSearchEditor && inputBoxFocus|| inputBoxFocus && searchViewletVisible"
+    },
+    {   // In file explorer, 'escape' to focus on editor
+        "key": "escape",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+    }
+]

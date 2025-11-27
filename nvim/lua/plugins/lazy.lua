@@ -16,16 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- Colorscheme
-    { "EdenEast/nightfox.nvim" },
-    { "pineapplegiant/spaceduck" },
     { "rebelot/kanagawa.nvim" },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     -- Fuzzy search
     {
@@ -33,24 +24,8 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
 
-    -- Check keymap
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {},
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ global = false })
-                end,
-                desc = "Buffer Local Keymaps (which-key)",
-            },
-        },
-    },
-
-    -- Exacyly jump
-    { "ggandor/leap.nvim", },
+    -- Easymotion
+    { "easymotion/vim-easymotion" },
 
     -- Edit file like buffer
     {

@@ -4,15 +4,30 @@ vim.g.mapleader = " "
 -- core
 vim.keymap.set("i", "jk", "<esc>", {desc = "Exit insert mode"})
 vim.keymap.set("c", "jk", "<cr>", {desc = "Run command"})
+vim.keymap.set("n", "<leader>r", ":!", {desc = "Run external command"})
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
 vim.keymap.set("n", "<leader>s", ":w<cr>", {desc = "Save file"})
 vim.keymap.set("n", "<leader>q", ":q<cr>", {desc = "Quit file"})
 vim.keymap.set("n", "<leader>nh", ":nohl<cr>", {desc = "Clear search highlight"})
 vim.keymap.set("v", "<tab>", ":normal @a<cr>", {desc = "Run macro 'a'"})
 
+-- quickfix
+vim.keymap.set("n", "<leader>co", ":copen<cr>", {desc = "Open quifix window"})
+vim.keymap.set("n", "<leader>cc", ":cclose<cr>", {desc = "Close quifix window"})
+vim.keymap.set("n", "<leader>cn", ":cnext<cr>", {desc = "Next fix"})
+vim.keymap.set("n", "<leader>cp", ":cprev<cr>", {desc = "Previous fix"})
+vim.keymap.set("n", "<leader>cf", ":cfirst<cr>", {desc = "First fix"})
+vim.keymap.set("n", "<leader>cl", ":clast<cr>", {desc = "Last fix"})
+
 -- line operations
-vim.keymap.set("n", "<enter>", "i<cr><esc>", {desc = "Split line"})
 vim.keymap.set("n", "du", "d^", {desc = "Delete to line start"})
+vim.keymap.set("n", "<enter>", function()
+    if vim.bo.modifiable then
+        return "i<enter><esc>"
+    else
+        return "<enter>"
+    end
+end, {desc = "Split line (only in modifiable buffers)", expr = true})
 
 -- buffer operations
 vim.keymap.set("n", "<leader>bd", ":bd<cr>", {desc = "Close buffer"})
@@ -27,7 +42,7 @@ vim.keymap.set("n", "<leader>bo", close_other_buffers, {desc = "Close other buff
 -- window operations
 vim.keymap.set("n", "<leader>wh", ":split<cr>", {desc = "Horizontal split window"})
 vim.keymap.set("n", "<leader>wv", ":vsplit<cr>", {desc = "Vertical split window"})
-vim.keymap.set("n", "<leader>wd", ":close<cr>", {desc = "Close window"})
+vim.keymap.set("n", "<leader>wc", ":close<cr>", {desc = "Close window"})
 vim.keymap.set("n", "<leader>wo", ":only<cr>", {desc = "Close other windows"})
 
 -- navigation
@@ -38,4 +53,4 @@ vim.keymap.set("n", "<A-k>", "<C-w>k", {desc = "Go to top window"})
 vim.keymap.set({"n", "v"}, "<C-h>", "^", {desc = "Go to line start"})
 vim.keymap.set("n", "<C-l>", "$", {desc = "Go to line end"})
 vim.keymap.set("v", "<C-l>", "$h", {desc = "Go to line end (no newline)"})
-vim.keymap.set("v", "<cr>", "<cmd>JumpToError<cr>", {desc = "Open error position in split window"})
+vim.keymap.set("v", "<enter>", "<cmd>JumpToError<cr>", {desc = "Open error position in split window"})
