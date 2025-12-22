@@ -20,6 +20,3 @@ end, { desc = 'Telescope find files (including hidden)' })
 
 -- leap
 vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap)', { desc = "Leap jump in current window" })
-
--- tagbar
-vim.keymap.set("n", "<leader>tt", ":TagbarToggle<cr>", { desc = "Display all tags" })

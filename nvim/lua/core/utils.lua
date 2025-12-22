@@ -79,3 +79,11 @@ function open_file_in_bottom_split(back, file_path, row, col)
 
     return true
 end
+
+local terminals = {}
+
+function create_term(name, hide)
+end
+
+function show_term(name)
+end

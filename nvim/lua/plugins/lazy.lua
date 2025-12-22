@@ -17,6 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Colorscheme
     { "rebelot/kanagawa.nvim" },
+    { "nyoom-engineering/oxocarbon.nvim" },
+    { "EdenEast/nightfox.nvim" },
 
     -- Fuzzy search
     {
@@ -75,11 +77,10 @@ require("lazy").setup({
         end
     },
 
-    -- Tagbar toggle
-    { "preservim/tagbar" },
+    -- Smooth cursor
+    { 'gen740/SmoothCursor.nvim' },
 }, {
     git = {
         url_format = "https://gh.bugdey.us.kg/https://github.com/%s.git"
     }
 })
-

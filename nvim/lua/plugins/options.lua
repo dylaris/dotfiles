@@ -10,7 +10,7 @@ require("oil").setup({
 
     -- display column info
     columns = {
-        "icon",
+        -- "icon",
         "permissions",
         "size",
         "mtime",
@@ -38,7 +38,7 @@ end
 require("nvim-treesitter.configs").setup {
   ensure_installed = {
       "c", "lua", "cpp", "markdown", "make", "bash", "go",
-      "javascript", "html", "css", "php", "python",
+      "javascript", "html", "css", "php", "python", "zig"
   },
     sync_install = false,
     auto_install = true,
@@ -64,7 +64,7 @@ require("nvim-treesitter.configs").setup {
 -- kanagawa
 require("kanagawa").setup{
     background = {
-        dark = "dragon",
+        dark = "wave",
         light = "lotus"
     },
     commentStyle = { italic = false },
@@ -78,4 +78,9 @@ require("kanagawa").setup{
             ["@variable.builtin"] = { italic = false },
         }
     end,
+}
+
+-- smooth cursor
+require("smoothcursor").setup{
+    fancy = { enable = true }
 }

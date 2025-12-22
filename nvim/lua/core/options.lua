@@ -11,8 +11,7 @@ end
 local function set_appearance()
     vim.opt.background = "dark"                 -- Set background to dark
     vim.opt.termguicolors = true                -- Enable true color support
-    vim.opt.laststatus = 2                      -- Show the status line or not
-    vim.opt.statusline = "[INFO] < %f > %m %r %=%l:%c [%p%%]"
+    vim.opt.laststatus = 1                      -- Show the status line or not
     vim.cmd("colorscheme kanagawa")
     vim.cmd("highlight CursorLine guibg=NONE")  -- Set background of cursorline
 end
@@ -55,7 +54,7 @@ local function set_find_path()
     local paths = {
         ".",
         "~/.config/nvim/**",
-        "~/programming/lib-sym-link/",
+        "~/programming/thirdparty/lib-sym-link/",
     }
 
     local path_str = ""
