@@ -17,13 +17,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Colorscheme
     { "rebelot/kanagawa.nvim" },
-    { "nyoom-engineering/oxocarbon.nvim" },
-    { "EdenEast/nightfox.nvim" },
 
     -- Fuzzy search
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        dependencies = { 'nvim-lua/plenary.nvim', },
     },
 
     -- Exacyly jump
@@ -39,9 +38,9 @@ require("lazy").setup({
 
     -- Quickly comment
     {
-        "terrortylor/nvim-comment",
+        'echasnovski/mini.comment',
         config = function()
-            require("nvim_comment").setup({create_mappings = false})
+            require('mini.comment').setup()
         end
     },
 
@@ -53,32 +52,41 @@ require("lazy").setup({
 
     -- Alignment
     {
-        'Vonr/align.nvim',
-        branch = "v2",
-        lazy = true,
-        init = function()
-            local NS = { noremap = true, silent = true }
-            -- Aligns to 1 character
-            vim.keymap.set('x', 'aa',
-                function()
-                    require'align'.align_to_char({
-                        length = 1,
-                    })
-                end, NS)
-
-            -- Aligns to a string with previews
-            vim.keymap.set('x', 'aw',
-                function()
-                    require'align'.align_to_string({
-                        preview = true,
-                        regex = false,
-                    })
-                end, NS)
+        'nvim-mini/mini.align',
+        version = '*',
+        config = function()
+            require('mini.align').setup()
         end
     },
 
     -- Smooth cursor
     { 'gen740/SmoothCursor.nvim' },
+    { "sphamba/smear-cursor.nvim", opts = {} },
+
+    -- Output shell command to quickfix
+    { "skywind3000/asyncrun.vim" },
+
+    -- Textobj
+    { 'nvim-mini/mini.ai', version = '*', },
+
+    -- Surround
+    {
+        'nvim-mini/mini.surround',
+        version = '*',
+        config = function()
+            require('mini.surround').setup()
+        end
+    },
+
+    -- Auto completion
+    { 'nvim-mini/mini.completion', version = '*' },
+    {
+        'nvim-mini/mini.cmdline',
+        version = '*',
+        config = function()
+            require("mini.cmdline").setup{}
+        end
+    },
 }, {
     git = {
         url_format = "https://gh.bugdey.us.kg/https://github.com/%s.git"

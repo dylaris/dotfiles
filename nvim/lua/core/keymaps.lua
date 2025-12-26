@@ -4,9 +4,9 @@ vim.g.mapleader = " "
 -- core
 vim.keymap.set("i", "jk", "<esc>", {desc = "Exit insert mode"})
 vim.keymap.set("c", "jk", "<cr>", {desc = "Run command"})
+vim.keymap.set("c", "jj", "<C-c>", {desc = "Discard command"})
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
 vim.keymap.set("n", "U", "<C-r>", {desc = "Reversed operation 'u'"})
-vim.keymap.set("n", "<leader>r", ":!", {desc = "Run external command"})
 vim.keymap.set("n", "<leader>s", ":w<cr>", {desc = "Save file"})
 vim.keymap.set("n", "<leader>q", ":q<cr>", {desc = "Quit file"})
 vim.keymap.set("n", "<leader>nh", ":nohl<cr>", {desc = "Clear search highlight"})
@@ -14,6 +14,13 @@ vim.keymap.set("v", "<tab>", ":normal @a<cr>", {desc = "Run macro 'a'"})
 
 -- line operations
 vim.keymap.set("n", "du", "d^", {desc = "Delete to line start"})
+vim.keymap.set("n", "<enter>", function()
+    if vim.bo.modifiable and not vim.bo.readonly then
+        return "i<cr><esc>"
+    else
+        return "<cr>"
+    end
+end, {expr = true})
 
 -- quickfix
 vim.keymap.set("n", "<leader>co", ":copen<cr>", {desc = "Open quickfix window"})
@@ -36,7 +43,6 @@ vim.keymap.set("n", "<leader>wh", ":split<cr>", {desc = "Horizontal split window
 vim.keymap.set("n", "<leader>wv", ":vsplit<cr>", {desc = "Vertical split window"})
 vim.keymap.set("n", "<leader>wc", ":close<cr>", {desc = "Close window"})
 vim.keymap.set("n", "<leader>wo", ":only<cr>", {desc = "Close other windows"})
-vim.keymap.set("n", "<leader>ww", "<C-w>w", {desc = "Switch window"})
 
 -- navigation
 vim.keymap.set("n", "gi", function()
@@ -54,7 +60,7 @@ vim.keymap.set({"n", "v"}, "<C-p>", "[m", {desc = "Go to previous method"})
 vim.keymap.set({"n", "v"}, "<C-n>", "]m", {desc = "Go to next method"})
 vim.keymap.set({"n", "v"}, "<C-k>", "{", {desc = "Go to previous paragraph"})
 vim.keymap.set({"n", "v"}, "<C-j>", "}", {desc = "Go to next paragraph"})
-vim.keymap.set({"n", "v"}, "<C-m>", "%", {desc = "Go to matching bracket"})
+vim.keymap.set({"n", "v"}, "<space><space>", "%", {desc = "Go to matching bracket"})
 
 -- ====== native useful command ======
 -- gg: Go to first line of file

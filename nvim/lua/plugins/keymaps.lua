@@ -1,8 +1,8 @@
 -- use space as leader key
 vim.g.mapleader = " "
 
--- nvim-comment
-vim.keymap.set({"n", "v"}, "gc", ":CommentToggle<cr>")
+-- asyncrun
+vim.keymap.set("n", "<leader>r", ":AsyncRun ")
 
 -- oil
 vim.keymap.set("n", "<leader>e", ":Oil --float<cr>")

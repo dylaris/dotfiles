@@ -10,7 +10,7 @@ require("oil").setup({
 
     -- display column info
     columns = {
-        -- "icon",
+        "icon",
         "permissions",
         "size",
         "mtime",
@@ -75,7 +75,12 @@ require("kanagawa").setup{
             CursorLineNr = { bg = "none", fg = colors.theme.ui.special, bold = true },
             SignColumn = { bg = "none" },
             FoldColumn = { bg = "none" },
+            Comment = { bg = "none", fg = "#a4b8c4" },
             ["@variable.builtin"] = { italic = false },
+            Pmenu = { fg = "#a9b1d6", bg = "#1f2335", blend = 10 },
+            PmenuSel = { fg = "#000000", bg = "#83a598", bold = true, italic = false },
+            PmenuSbar = { bg = "#292e42" },
+            PmenuThumb = { bg = "#3d59a1" },
         }
     end,
 }
@@ -84,3 +89,33 @@ require("kanagawa").setup{
 require("smoothcursor").setup{
     fancy = { enable = true }
 }
+
+-- telescope
+require('telescope').setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["jj"] = require('telescope.actions').close,
+            },
+        },
+    },
+})
+
+-- mini.ai
+local gen_spec = require('mini.ai').gen_spec
+require("mini.ai").setup{
+    custom_textobjects = {
+        ['b'] = { { '%b()', '%b[]', '%b{}', '%b<>' }, '^.%s*().-()%s*.$' },
+        ['B'] = { { '%b()', '%b[]', '%b{}', '%b<>' }, '^.().*().$' },
+    }
+}
+
+-- mini.completion
+require('mini.completion').setup({
+    delay = { completion = 100 },
+    lsp_completion = { auto_setup = false },
+    sources = {
+        { source = 'buffer' },
+        { source = 'path' },
+    },
+})

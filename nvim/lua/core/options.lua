@@ -4,7 +4,12 @@ local function set_basic_config()
     vim.opt.syntax = "on"                       -- Enable syntax highlighting
     vim.cmd("filetype on")                      -- Enable filetype detection
     vim.cmd("filetype indent on")               -- Enable auto indentation
-    vim.opt.fileformats = { "unix", "dos" }     -- Set file formats to Unix and DOS
+    local os = vim.loop.os_uname().sysname
+    if os == "Windows_NT" then
+        vim.opt.fileformats = "dos"
+    else
+        vim.opt.fileformats = "unix"
+    end
 end
 
 -- Appearance and interface settings
@@ -51,11 +56,16 @@ end
 
 -- Search path for builtin-command find
 local function set_find_path()
-    local paths = {
-        ".",
-        "~/.config/nvim/**",
-        "~/programming/thirdparty/lib-sym-link/",
-    }
+    local paths = {}
+
+    table.insert(paths, ".")
+    local os = vim.loop.os_uname().sysname
+    if os == "Windows_NT" then
+        table.insert(paths, "C:\\Users\\Aris\\AppData\\Local\\nvim\\**")
+    else
+        table.insert(paths, "~/.config/nvim/**")
+        table.insert(paths, "~/programming/thirdparty/symlinks/")
+    end
 
     local path_str = ""
     for i, path in ipairs(paths) do
