@@ -8,6 +8,13 @@ require("oil").setup({
         show_hidden = false,
     },
 
+    -- add border
+    float = { border = "rounded" },
+    confirmation = { border = "rounded" },
+    progress = { border = "rounded" },
+    ssh = { border = "rounded" },
+    keymaps_help = { border = "rounded" },
+
     -- display column info
     columns = {
         "icon",
@@ -23,11 +30,11 @@ require("oil").setup({
       ["<C-p>"] = "actions.preview",                -- preview file content
       ["J"] = { "actions.select", mode = "n" },     -- open file or enter directory
       ["K"] = { "actions.parent", mode = "n" },     -- go back to parent directory
-      ["H"] = { "actions.open_cwd", mode = "n" },   -- open the current working directory
-      ["L"] = { "actions.refresh", mode = "n" },    -- Refresh oil buffer
+      ["W"] = { "actions.open_cwd", mode = "n" },   -- open the current working directory
+      ["R"] = { "actions.refresh", mode = "n" },    -- Refresh oil buffer
       ["S"] = { "actions.cd", mode = "n" },         -- set current directory as working directory
-      ["g."] = { "actions.toggle_hidden", mode = "n" },   -- switch to show hidden file
-      ["gs"] = { "actions.change_sort", mode = "n" },     -- change sort method
+      ["H"] = { "actions.toggle_hidden", mode = "n" },   -- switch to show hidden file
+      ["C"] = { "actions.change_sort", mode = "n" },      -- change sort method
     },
 })
 
@@ -73,6 +80,7 @@ require("kanagawa").setup{
         return {
             LineNr = { bg = "none", fg = colors.theme.ui.nontext },
             CursorLineNr = { bg = "none", fg = colors.theme.ui.special, bold = true },
+            CursorLine = { bg = "none" },
             SignColumn = { bg = "none" },
             FoldColumn = { bg = "none" },
             Comment = { bg = "none", fg = "#a4b8c4" },
@@ -84,6 +92,25 @@ require("kanagawa").setup{
         }
     end,
 }
+
+-- ayu
+local mirage = true
+require('ayu').setup({
+    mirage = mirage,
+    overrides = function()
+        local res = {
+            Special = { fg = "#95E6CB" },
+            Type = { fg = "#F07178" },
+            ['@type'] = { fg = "#F07178" },
+            ['@type.builtin'] = { fg = "#F07178" },
+        }
+        if not mirage then
+            res['CursorLineNr'] = { bg = "none" }
+            res['CursorLine'] = { bg = "None" }
+        end
+        return res
+    end,
+})
 
 -- smooth cursor
 require("smoothcursor").setup{
@@ -109,13 +136,3 @@ require("mini.ai").setup{
         ['B'] = { { '%b()', '%b[]', '%b{}', '%b<>' }, '^.().*().$' },
     }
 }
-
--- mini.completion
-require('mini.completion').setup({
-    delay = { completion = 100 },
-    lsp_completion = { auto_setup = false },
-    sources = {
-        { source = 'buffer' },
-        { source = 'path' },
-    },
-})

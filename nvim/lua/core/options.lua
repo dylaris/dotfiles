@@ -17,8 +17,7 @@ local function set_appearance()
     vim.opt.background = "dark"                 -- Set background to dark
     vim.opt.termguicolors = true                -- Enable true color support
     vim.opt.laststatus = 1                      -- Show the status line or not
-    vim.cmd("colorscheme kanagawa")
-    vim.cmd("highlight CursorLine guibg=NONE")  -- Set background of cursorline
+    vim.cmd("colorscheme ayu")
 end
 
 -- Clipboard and autocompletion settings

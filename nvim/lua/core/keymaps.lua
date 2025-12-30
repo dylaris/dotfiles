@@ -9,7 +9,7 @@ vim.keymap.set("t", "<esc>", "<C-\\><C-n>", {desc = "Exit terminal mode"})
 vim.keymap.set("n", "U", "<C-r>", {desc = "Reversed operation 'u'"})
 vim.keymap.set("n", "<leader>s", ":w<cr>", {desc = "Save file"})
 vim.keymap.set("n", "<leader>q", ":q<cr>", {desc = "Quit file"})
-vim.keymap.set("n", "<leader>nh", ":nohl<cr>", {desc = "Clear search highlight"})
+vim. keymap.set("n", "<leader>nh", ":nohl<cr>", {desc = "Clear search highlight"})
 vim.keymap.set("v", "<tab>", ":normal @a<cr>", {desc = "Run macro 'a'"})
 
 -- line operations
@@ -56,11 +56,15 @@ vim.keymap.set("n", "<C-h>", "^", {desc = "Go to line start"})
 vim.keymap.set("v", "<C-h>", "^", {desc = "Go to line start"})
 vim.keymap.set("n", "<C-l>", "$", {desc = "Go to line end"})
 vim.keymap.set("v", "<C-l>", "$h", {desc = "Go to line end (no newline)"})
-vim.keymap.set({"n", "v"}, "<C-p>", "[m", {desc = "Go to previous method"})
-vim.keymap.set({"n", "v"}, "<C-n>", "]m", {desc = "Go to next method"})
+-- vim.keymap.set({"n", "v"}, "<C-p>", "[m", {desc = "Go to previous method"})
+-- vim.keymap.set({"n", "v"}, "<C-n>", "]m", {desc = "Go to next method"})
 vim.keymap.set({"n", "v"}, "<C-k>", "{", {desc = "Go to previous paragraph"})
 vim.keymap.set({"n", "v"}, "<C-j>", "}", {desc = "Go to next paragraph"})
 vim.keymap.set({"n", "v"}, "<space><space>", "%", {desc = "Go to matching bracket"})
+vim.keymap.set("n", "<A-h>", "<C-w>wh", {desc = "Go to left window"})
+vim.keymap.set("n", "<A-l>", "<C-w>wl", {desc = "Go to right window"})
+vim.keymap.set("n", "<A-k>", "<C-w>wk", {desc = "Go to up window"})
+vim.keymap.set("n", "<A-j>", "<C-w>wj", {desc = "Go to down window"})
 
 -- ====== native useful command ======
 -- gg: Go to first line of file

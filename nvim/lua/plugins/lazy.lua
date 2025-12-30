@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Colorscheme
     { "rebelot/kanagawa.nvim" },
+    { "Shatur/neovim-ayu" },
 
     -- Fuzzy search
     {
@@ -55,13 +56,17 @@ require("lazy").setup({
         'nvim-mini/mini.align',
         version = '*',
         config = function()
-            require('mini.align').setup()
+            require('mini.align').setup({
+                mappings = {
+                  start = '',
+                },
+            })
         end
     },
 
     -- Smooth cursor
     { 'gen740/SmoothCursor.nvim' },
-    { "sphamba/smear-cursor.nvim", opts = {} },
+    { "sphamba/smear-cursor.nvim", opts = { smear_insert_mode = false } },
 
     -- Output shell command to quickfix
     { "skywind3000/asyncrun.vim" },
@@ -75,16 +80,6 @@ require("lazy").setup({
         version = '*',
         config = function()
             require('mini.surround').setup()
-        end
-    },
-
-    -- Auto completion
-    { 'nvim-mini/mini.completion', version = '*' },
-    {
-        'nvim-mini/mini.cmdline',
-        version = '*',
-        config = function()
-            require("mini.cmdline").setup{}
         end
     },
 }, {

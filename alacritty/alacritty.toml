@@ -1,15 +1,24 @@
 # general.import = ["catppuccin-mocha.toml"]
 # general.import = ["kanagawa-wave.toml"]
-general.import = ["kanagawa-dragon.toml"]
+general.import = ["ayu_dark.toml"]
 
 [font]
-size = 12.0
+size = 10.0
 # normal = { family = "BlexMono Nerd Font", style = "Regular" }
 # bold   = { family = "BlexMono Nerd Font", style = "Bold" }
 # italic = { family = "BlexMono Nerd Font", style = "Italic" }
+# normal = { family = "CodeNewRoman Nerd Font", style = "Regular" }
+# bold   = { family = "CodeNewRoman Nerd Font", style = "Bold" }
+# italic = { family = "CodeNewRoman Nerd Font", style = "Italic" }
 normal = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
 bold   = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
 italic = { family = "Inconsolata LGC Nerd Font", style = "Italic" }
+# normal = { family = "IosevkaTerm Nerd Font", style = "Bold" }
+# bold   = { family = "IosevkaTerm Nerd Font", style = "Bold" }
+# italic = { family = "IosevkaTerm Nerd Font", style = "Italic" }
+# normal = { family = "Monoflow", style = "Bold" }
+# bold   = { family = "Monoflow", style = "Bold" }
+# italic = { family = "Monoflow", style = "Italic" }
 
 [window]
 decorations = "Full"
@@ -33,7 +42,8 @@ bindings = [
 ]
 
 [terminal.shell]
-program = "wsl.exe"
+# program = "wsl.exe -d void-x86_64"
+program = "wsl.exe -d openSUSE-Tumbleweed"
 
 [env]
 TERM = "xterm-256color"
