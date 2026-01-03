@@ -40,13 +40,13 @@ require("oil").setup({
 
 -- treesitter
 for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
-  config.install_info.url = config.install_info.url:gsub("https://github.com/", "https://gh.llkk.cc/https://github.com/")
+    config.install_info.url = config.install_info.url:gsub("https://github.com/", "https://gh.llkk.cc/https://github.com/")
 end
 require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-      "c", "lua", "cpp", "markdown", "make", "bash", "go",
-      "javascript", "html", "css", "php", "python", "zig"
-  },
+    ensure_installed = {
+        "c", "lua", "cpp", "markdown", "make", "bash", "go",
+        "javascript", "html", "css", "php", "python",
+    },
     sync_install = false,
     auto_install = true,
     ignore_install = {},
@@ -136,3 +136,27 @@ require("mini.ai").setup{
         ['B'] = { { '%b()', '%b[]', '%b{}', '%b<>' }, '^.().*().$' },
     }
 }
+
+-- nvim-cmp
+local cmp = require("cmp")
+cmp.setup({
+    sources = {
+        { name = "buffer" },
+        { name = "tags" },
+        { name = "path" },
+    },
+})
+cmp.setup.cmdline(":", {
+    sources = cmp.config.sources({
+        { name = "cmdline" },
+        { name = "path" },
+    }),
+    mapping = cmp.mapping.preset.cmdline({
+        ["<C-n>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then cmp.select_next_item() else fallback() end
+        end, { "c" }),
+        ["<C-p>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then cmp.select_prev_item() else fallback() end
+        end, { "c" }),
+    }),
+})

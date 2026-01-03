@@ -19,6 +19,17 @@ require("lazy").setup({
     { "rebelot/kanagawa.nvim" },
     { "Shatur/neovim-ayu" },
 
+    -- Auto completion
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-path",
+            "quangnguyen30192/cmp-nvim-tags",
+        },
+    },
+
     -- Fuzzy search
     {
         'nvim-telescope/telescope.nvim',
