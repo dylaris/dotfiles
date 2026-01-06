@@ -1,8 +1,26 @@
--- Set errorfmt for c3
+-- Set compiler for language
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "c3",
-    callback = function()
-        vim.bo.errorformat = [[(%f:%l:%c)%\s%m]] -- (file.c3:5:1) Error message
+    pattern = {"c3", "python"},
+    callback = function(args)
+        local ft = args.match
+        local compilers = {
+            c3 = "c3c",
+            python = "pyunit",
+        }
+        vim.cmd("compiler " .. compilers[ft])
+    end
+})
+
+-- Set errorfmt for language
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"javascript", "typescript"},
+    callback = function(args)
+        local ft = args.match
+        local patterns = {
+            javascript = [[%\\s%\\+at\ %f:%l:%c,%f:%l]],
+            typescript = [[%\\s%\\+at\ %f:%l:%c,%f:%l]],
+        }
+        vim.bo.errorformat = patterns[ft] or ""
     end
 })
 
