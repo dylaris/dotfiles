@@ -93,6 +93,17 @@ require("kanagawa").setup{
     end,
 }
 
+-- rose-pine
+require("rose-pine").setup{
+    variant = "moon", -- auto, main, moon, or dawn
+    styles = {
+        italic = false,
+    },
+    highlight_groups = {
+        CursorLine = { bg = "none" },
+    },
+}
+
 -- ayu
 local mirage = true
 require('ayu').setup({
@@ -112,10 +123,25 @@ require('ayu').setup({
     end,
 })
 
--- smooth cursor
-require("smoothcursor").setup{
-    fancy = { enable = true }
+-- tokyonight
+require("tokyonight").setup{
+    style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
+    styles = {
+        comments = { italic = false },
+        keywords = { italic = false },
+    },
+    on_highlights = function(highlights, colors)
+        highlights["CursorLine"] = { bg = "none" }
+    end,
 }
+
+-- smooth cursor
+-- require("smoothcursor").setup{
+--     fancy = {
+--         enable = true,
+--         head = { cursor = "∅" },
+--     }
+-- }
 
 -- telescope
 require('telescope').setup({
@@ -141,7 +167,14 @@ require("mini.ai").setup{
 local cmp = require("cmp")
 cmp.setup({
     sources = {
-        { name = "buffer" },
+        {
+            name = "buffer",
+            option = {
+                get_bufnrs = function ()
+                    return vim.api.nvim_list_bufs()
+                end
+            }
+        },
         { name = "tags" },
         { name = "path" },
     },

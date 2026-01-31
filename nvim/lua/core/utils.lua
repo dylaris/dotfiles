@@ -80,3 +80,7 @@ function open_file_in_bottom_split(back, file_path, row, col)
     return true
 end
 
+function print_plus(v)
+    print(vim.inspect(v))
+    return v
+end

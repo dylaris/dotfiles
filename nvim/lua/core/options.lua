@@ -17,7 +17,7 @@ local function set_appearance()
     vim.opt.background = "dark"                 -- Set background to dark
     vim.opt.termguicolors = true                -- Enable true color support
     vim.opt.laststatus = 1                      -- Show the status line or not
-    vim.cmd("colorscheme ayu")
+    vim.cmd("colorscheme rose-pine")
 end
 
 -- Clipboard and autocompletion settings

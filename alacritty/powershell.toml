@@ -1,0 +1,54 @@
+# general.import = ["catppuccin-mocha.toml"]
+# general.import = ["kanagawa-wave.toml"]
+general.import = ["ayu_mirage.toml"]
+
+[font]
+size = 10.0
+# normal = { family = "BlexMono Nerd Font", style = "Regular" }
+# bold   = { family = "BlexMono Nerd Font", style = "Bold" }
+# italic = { family = "BlexMono Nerd Font", style = "Italic" }
+# normal = { family = "CodeNewRoman Nerd Font", style = "Regular" }
+# bold   = { family = "CodeNewRoman Nerd Font", style = "Bold" }
+# italic = { family = "CodeNewRoman Nerd Font", style = "Italic" }
+# normal = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
+# bold   = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
+# italic = { family = "Inconsolata LGC Nerd Font", style = "Italic" }
+normal = { family = "Monaco Nerd Font", style = "Bold" }
+bold   = { family = "Monaco Nerd Font", style = "Bold" }
+italic = { family = "Monaco Nerd Font", style = "Italic" }
+# normal = { family = "Maple Mono NF CN", style = "SemiBold" }
+# bold   = { family = "Maple Mono NF CN", style = "Bold" }
+# italic = { family = "Maple Mono NF CN", style = "Italic" }
+# normal = { family = "IosevkaTerm Nerd Font", style = "Bold" }
+# bold   = { family = "IosevkaTerm Nerd Font", style = "Bold" }
+# italic = { family = "IosevkaTerm Nerd Font", style = "Italic" }
+# normal = { family = "Monoflow", style = "Bold" }
+# bold   = { family = "Monoflow", style = "Bold" }
+# italic = { family = "Monoflow", style = "Italic" }
+
+[window]
+decorations = "Full"
+padding = { x = 15, y = 10 }
+dynamic_title = false
+title = "Hello, Powershell"
+dimensions = { columns = 120, lines = 30 }
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 750
+
+[keyboard]
+bindings = [
+    { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+    { key = "Minus",  mods = "Control", action = "DecreaseFontSize" },
+    { key = "Key0",   mods = "Control", action = "ResetFontSize" },
+    { key = "C", mods = "Control|Shift", action = "Copy" },
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
+]
+
+[terminal.shell]
+program = "powershell.exe"
+
+[env]
+TERM = "xterm-256color"

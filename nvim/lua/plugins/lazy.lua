@@ -18,6 +18,19 @@ require("lazy").setup({
     -- Colorscheme
     { "rebelot/kanagawa.nvim" },
     { "Shatur/neovim-ayu" },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        config = function()
+            vim.cmd("colorscheme rose-pine")
+        end
+    },
 
     -- Auto completion
     {
@@ -76,7 +89,7 @@ require("lazy").setup({
     },
 
     -- Smooth cursor
-    { 'gen740/SmoothCursor.nvim' },
+    -- { 'gen740/SmoothCursor.nvim' },
     { "sphamba/smear-cursor.nvim", opts = { smear_insert_mode = false } },
 
     -- Output shell command to quickfix
