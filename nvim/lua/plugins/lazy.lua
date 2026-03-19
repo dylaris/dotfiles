@@ -16,21 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- Colorscheme
-    { "rebelot/kanagawa.nvim" },
-    { "Shatur/neovim-ayu" },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-    },
-    {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            vim.cmd("colorscheme rose-pine")
-        end
-    },
+    { "oskarnurm/koda.nvim", lazy = false, priority = 1000 },
 
     -- Auto completion
     {
@@ -43,6 +29,12 @@ require("lazy").setup({
         },
     },
 
+    -- Status line
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+    },
+
     -- Fuzzy search
     {
         'nvim-telescope/telescope.nvim',
@@ -51,7 +43,7 @@ require("lazy").setup({
     },
 
     -- Exacyly jump
-    { "ggandor/leap.nvim", },
+    { url = "https://codeberg.org/andyg/leap.nvim" },
 
     -- Edit file like buffer
     {
@@ -90,7 +82,7 @@ require("lazy").setup({
 
     -- Smooth cursor
     -- { 'gen740/SmoothCursor.nvim' },
-    { "sphamba/smear-cursor.nvim", opts = { smear_insert_mode = false } },
+    -- { "sphamba/smear-cursor.nvim", opts = { smear_insert_mode = false } },
 
     -- Output shell command to quickfix
     { "skywind3000/asyncrun.vim" },

@@ -68,81 +68,6 @@ require("nvim-treesitter.configs").setup {
     },
 }
 
--- kanagawa
-require("kanagawa").setup{
-    background = {
-        dark = "wave",
-        light = "lotus"
-    },
-    commentStyle = { italic = false },
-    keywordStyle = { italic = false },
-    overrides = function(colors)
-        return {
-            LineNr = { bg = "none", fg = colors.theme.ui.nontext },
-            CursorLineNr = { bg = "none", fg = colors.theme.ui.special, bold = true },
-            CursorLine = { bg = "none" },
-            SignColumn = { bg = "none" },
-            FoldColumn = { bg = "none" },
-            Comment = { bg = "none", fg = "#a4b8c4" },
-            ["@variable.builtin"] = { italic = false },
-            Pmenu = { fg = "#a9b1d6", bg = "#1f2335", blend = 10 },
-            PmenuSel = { fg = "#000000", bg = "#83a598", bold = true, italic = false },
-            PmenuSbar = { bg = "#292e42" },
-            PmenuThumb = { bg = "#3d59a1" },
-        }
-    end,
-}
-
--- rose-pine
-require("rose-pine").setup{
-    variant = "moon", -- auto, main, moon, or dawn
-    styles = {
-        italic = false,
-    },
-    highlight_groups = {
-        CursorLine = { bg = "none" },
-    },
-}
-
--- ayu
-local mirage = true
-require('ayu').setup({
-    mirage = mirage,
-    overrides = function()
-        local res = {
-            Special = { fg = "#95E6CB" },
-            Type = { fg = "#F07178" },
-            ['@type'] = { fg = "#F07178" },
-            ['@type.builtin'] = { fg = "#F07178" },
-        }
-        if not mirage then
-            res['CursorLineNr'] = { bg = "none" }
-            res['CursorLine'] = { bg = "None" }
-        end
-        return res
-    end,
-})
-
--- tokyonight
-require("tokyonight").setup{
-    style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
-    styles = {
-        comments = { italic = false },
-        keywords = { italic = false },
-    },
-    on_highlights = function(highlights, colors)
-        highlights["CursorLine"] = { bg = "none" }
-    end,
-}
-
--- smooth cursor
--- require("smoothcursor").setup{
---     fancy = {
---         enable = true,
---         head = { cursor = "∅" },
---     }
--- }
-
 -- telescope
 require('telescope').setup({
     defaults = {
@@ -211,3 +136,16 @@ cmp.setup.cmdline(":", {
         end, { "c" }),
     }),
 })
+
+-- lualine
+require("lualine").setup{
+    options = {
+        theme = 'auto',
+    }
+}
+
+-- asyncrun
+local os = vim.loop.os_uname().sysname
+if os == "Windows_NT" then
+    vim.g.asyncrun_encs = 'gbk'
+end

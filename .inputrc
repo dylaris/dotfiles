@@ -1,15 +1,15 @@
 # Enable vi-mode (for libreadline)
 
- set editing-mode vi
- set show-mode-in-prompt on
- set vi-ins-mode-string \1\e[6 q\2
- set vi-cmd-mode-string \1\e[2 q\2
+set editing-mode vi
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[3 q\2
+set vi-cmd-mode-string \1\e[2 q\2
 
- $if mode=vi
-     set keymap vi-command
-     "\C-h": beginning-of-line
-     "\C-l": end-of-line
-     set keymap vi-insert
-     "jk" vi-movement-mode
-     "\C-l": clear-screen
- $endif
+$if mode=vi
+    set keymap vi-command
+    "\C-h": beginning-of-line
+    "\C-l": end-of-line
+    set keymap vi-insert
+    "jk" vi-movement-mode
+    "\C-l": clear-screen
+$endif

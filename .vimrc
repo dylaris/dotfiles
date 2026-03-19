@@ -1,8 +1,45 @@
 "==============================================
+" Util Functions
+"==============================================
+function! ReverseLines()
+    let lines = getline("'<", "'>")
+    call setline("'<", reverse(lines))
+endfunction
+
+function! CreateTempBuffer()
+    botright vnew
+    let buf = bufnr('%')
+    setlocal buftype=nofile
+    setlocal bufhidden=wipe
+    setlocal noswapfile
+    setlocal filetype=text
+    call setline(1, [
+        \ 'This is a temporary buffer...',
+        \ 'You can write anything here...',
+        \ ''
+    \ ])
+    return buf
+endfunction
+
+function! CloseOtherBuffers()
+    let current_buf = bufnr('%')
+    for buf in getbufinfo({'buflisted': 1})
+        if buf.bufnr != current_buf && buf.loaded
+            execute 'bdelete' buf.bufnr
+        endif
+    endfor
+endfunction
+
+function! ProxyUrl(repo)
+    let url_format = "https://gh.bugdey.us.kg/https://github.com/%s.git"
+    return printf(url_format, a:repo)
+endfunction
+
+"==============================================
 " Plugin Configuration
 "==============================================
 if !exists('g:load_plugins')
-    let g:load_plugins = 0
+    let g:load_plugins = 1
 endif
 
 if g:load_plugins
@@ -16,18 +53,26 @@ if g:load_plugins
 
     " Plug install
     call plug#begin(s:plug_dir)
-        Plug 'NLKNguyen/papercolor-theme'
-        Plug 'junegunn/vim-easy-align'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'tpope/vim-commentary'
+        Plug ProxyUrl('NLKNguyen/papercolor-theme')
+        Plug ProxyUrl('junegunn/vim-easy-align')
+        Plug ProxyUrl('easymotion/vim-easymotion')
+        Plug ProxyUrl('tpope/vim-commentary')
+        Plug ProxyUrl('skywind3000/asyncrun.vim')
     call plug#end()
+endif
 
-    " Plug setting
+"==============================================
+" Plugin Settings
+"==============================================
+if g:load_plugins
     " netrw
     let g:netrw_banner       = 0  " Hide banner (the top directory info)
     let g:netrw_liststyle    = 3  " Tree-style listing
     let g:netrw_browse_split = 4  " Open file in previous window
     let g:netrw_winsize      = 25 " Set window width to 25%
+
+    " asyncrun
+    let g:asyncrun_encs = 'gbk'
 endif
 
 "==============================================
@@ -66,103 +111,106 @@ endif
 " Settings
 "==============================================
 " Basic setttings configuration
-set nocompatible                    " Disable vi compatibility mode
-syntax on                           " Enable syntax highlighting
-filetype on                         " Enable filetype detection
-filetype indent on                  " Enable auto indentation
-set fileformats=unix,dos            " Handle both Unix and DOS line endings
+set nocompatible                    " Vi compatibility mode
+syntax on                           " Syntax highlighting
+filetype on                         " Filetype detection
+filetype indent on                  " Uuto indentation
+if has('win32') || has('win64')
+    set fileformats=dos
+else
+    set fileformats=unix
+endif
 
 " Appearance and interface settings
-set background=dark
-set termguicolors                   " Enable true color support
+set background=dark                 " Background color
+set termguicolors                   " True color support
+set laststatus=2                    " Show status line or not
 colorscheme PaperColor
-set laststatus=2                    " Always show status line
+highlight CursorLine guibg=NONE
+highlight CursorLineNr guibg=NONE
 set guifont=Inconsolata_LGC_Nerd_Font:h9:b:cANSI:qDRAFT
+set guicursor=n-v-sm:block,i-c-ci-ve:hor20,r-cr-o:hor20
+" default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 
 " Clipboard and autocompletion settings
 set clipboard=unnamedplus           " Set clipboard to use the system clipboard
-set complete+=d                     " Include dictionary completion
+set complete+=d                     " Enable auto completion for C/C++ macros
 
 " Tab and indentation settings
 set tabstop=4                       " Visual spaces per tab
 set softtabstop=4                   " Spaces in edit operation
-set expandtab                       " Convert tabs to spaces
+set expandtab                       " Convert tab to spaces
+set smarttab                        " Smart tabbing
 set shiftwidth=4                    " Autoindent width
-set autoindent                      " Enable auto indentation
-set cindent                         " C indent handling
-set smarttab                        " Smart tab handling
+set autoindent                      " Auto indentation
+set cindent                         " C style auto indentation
 
 " Search settings
 set hls                             " Highlight search matches
 set ignorecase                      " Case insensitive search
-set smartcase                       " Smart case sensitivity
+set smartcase                       " Smart case search (case-sensitive if uppercase is used)
 set showmatch                       " Highlight matching brackets
 
 " File management settings
-set nobackup                        " Disable backup files
-set noswapfile                      " Disable swap files
-set nowritebackup                   " Disable write backup
-set noundofile                      " Disable undo files
+set nobackup                        " Backup files
+set noswapfile                      " Swap files
+set nowritebackup                   " Write backup
+set noundofile                      " Undo files
 
 " Search path for builtin-command find
-set path=~/project/personal/aris/**,~/project/personal/json/**
+set path=.
 
 " Line Numbers
 set number                          " Show absolute line numbers
 set relativenumber                  " Show relative line numbers
-set nocursorline                    " No highlight current line
+set cursorline                      " Highlight current line
 
 " Other settings
 set belloff=all                     " Disable bell
-set mouse=a                         " Enable mouse in all modes
+set mouse=a                         " Mouse support in all modes
 set updatetime=300                  " Shorter update time for better responsiveness
+set showmode                        " Show current mode
 
 "==============================================
 " Autocommands
 "==============================================
-" Set filetype=c for C header files
-autocmd BufNewFile,BufRead *.h set filetype=c
-" Set filetype=fasm for asm/inc file
-autocmd BufReadPre *.asm,*.inc let g:asmsyntax = "fasm"
-" Disable automatic comments on new line
+" Set compiler for language: c3, python
+autocmd FileType c3 compiler c3c
+autocmd FileType python compiler pyunit
+
+" Set errorfmt for javascript / typescript
+autocmd FileType javascript setlocal errorformat=%\s%\++at\ %f:%l:%c,%f:%l
+autocmd FileType typescript setlocal errorformat=%\s%\++at\ %f:%l:%c,%f:%l
+
+" Set filetype=c for C header file (*.h)
+autocmd BufNewFile,BufRead *.h setlocal filetype=c
+
+" Set filetype=fasm for asm/inc
+autocmd BufNewFile,BufRead *.asm,*.inc setlocal filetype=fasm
+
+" Auto remove trailing whitespace & ^M (Windows newline) on save
+function! s:TrimWhitespace()
+    let cursor_pos = getpos('.')
+    %s/\s\+$//e
+    %s/\r//e
+    call setpos('.', cursor_pos)
+endfunction
+autocmd BufWritePre * call s:TrimWhitespace()
+
+" Disable auto comment on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" Automatically remove trailing whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+
+" Comment format
+autocmd FileType c,cpp,cs,java,javascript,typescript,rust,go setlocal commentstring=//\ %s
+autocmd FileType python,bash,zsh,ruby setlocal commentstring=#\ %s
+autocmd FileType html setlocal commentstring=<!--\ %s\ -->
+autocmd FileType css setlocal commentstring=/*\ %s\ */
+autocmd FileType asm,fasm,nasm,inc setlocal commentstring=;\ %s
+autocmd FileType lua setlocal commentstring=--\ %s
+autocmd FileType vim setlocal commentstring=\"\ %s
 
 "==============================================
-" Util Functions
-"==============================================
-function! ReverseLines()
-    let lines = getline("'<", "'>")
-    call setline("'<", reverse(lines))
-endfunction
-
-function! CreateTempBuffer()
-    botright vnew
-    let buf = bufnr('%')
-    setlocal buftype=nofile
-    setlocal bufhidden=wipe
-    setlocal noswapfile
-    setlocal filetype=text
-    call setline(1, [
-        \ 'This is a temporary buffer...',
-        \ 'You can write anything here...',
-        \ ''
-    \ ])
-    return buf
-endfunction
-
-function! CloseOtherBuffers()
-    let current_buf = bufnr('%')
-    for buf in getbufinfo({'buflisted': 1})
-        if buf.bufnr != current_buf && buf.loaded
-            execute 'bdelete' buf.bufnr
-        endif
-    endfor
-endfunction
-
-"==============================================
-" Key Mappings
+" Key Map
 "==============================================
 let mapleader = "\<Space>"          " Leader key
 
@@ -173,8 +221,12 @@ let mapleader = "\<Space>"          " Leader key
 inoremap jk <Esc>
 " Run command
 cnoremap jk <Esc>
+" Discard command
+cnoremap jj <C-c>
 " Exit terminal mode
 tnoremap <Esc> <C-\><C-n>
+" Reversed operation 'u'
+nnoremap U <C-r>
 " Save file
 nnoremap <Leader>s :w<CR>
 " Quit file
@@ -185,6 +237,7 @@ nnoremap <Leader>nh :nohl<CR>
 vnoremap <Tab> :normal @a<CR>
 " Paste from system clipboard
 nnoremap <Leader>p "+p
+nnoremap p ""p
 " Yank to system clipboard
 vnoremap <Leader>y "+y
 " Open file explorer
@@ -201,24 +254,38 @@ nnoremap du d^
 vnoremap <leader>rl :call ReverseLines()<CR>
 
 "----------------------------------------------
+" quickfix
+"----------------------------------------------
+" Open quickfix window
+nnoremap <Leader>co :copen<CR>
+" Close quickfix window
+nnoremap <Leader>cc :cclose<CR>
+" Jump to next fix
+nnoremap <Leader>cn :cnext<CR>
+" Jump to previous fix
+nnoremap <Leader>cp :cprev<CR>
+" Jump to first fix
+nnoremap <Leader>cf :cfirst<CR>
+" Jump to last fix
+nnoremap <Leader>cl :clast<CR>
+
+"----------------------------------------------
 " buffer operations
 "----------------------------------------------
-" Close other buffers
-nnoremap <Leader>bo :call CloseOtherBuffers()<CR>
-" Create a tmp buffer
-nnoremap <Leader>bt :call CreateTempBuffer()<CR>
-" Edit vimrc
-nnoremap <Leader>br :e! $MYVIMRC<CR>
 " Close buffer
 nnoremap <Leader>bd :bd<CR>
-" Force close buffer
-nnoremap <Leader>bD :bd!<CR>
 " Unload buffer
 nnoremap <Leader>bu :bun<CR>
 " Switch to last visited buffer
 nnoremap <Leader>bv :b#<CR>
-" Search selected text
-vnoremap <Leader>bf y/<C-r>0<CR>
+" Close other buffers
+nnoremap <Leader>bo :call CloseOtherBuffers()<CR>
+" Show buffer path
+nnoremap <leader>bp :redir @+ <bar> echo expand('%:p') <bar> redir END<CR>
+" Create a tmp buffer
+nnoremap <Leader>bt :call CreateTempBuffer()<CR>
+" Edit vimrc
+nnoremap <Leader>br :e! $MYVIMRC<CR>
 " Show file path
 nnoremap <Leader>bp :echo expand('%:p')<CR>
 
@@ -230,7 +297,7 @@ nnoremap <Leader>wh :split<CR>
 " Vertical split window
 nnoremap <Leader>wv :vsplit<CR>
 " Close window
-nnoremap <Leader>wd :close<CR>
+nnoremap <Leader>wc :close<CR>
 " Close other windows
 nnoremap <Leader>wo :only<CR>
 
@@ -252,14 +319,28 @@ vnoremap <C-h> ^
 nnoremap <C-l> $
 " Go to line end (no newline)
 vnoremap <C-l> $h
+" Go to previous paragraph
+nnoremap <C-k> {
+vnoremap <C-k> {
+" Go to next paragraph
+nnoremap <C-j> }
+vnoremap <C-j> }
+" Go to matching bracket
+nnoremap <Leader><Leader> %
+vnoremap <Leader><Leader> %
 " s{char}{char} to move to {char}{char}
-nnoremap gs <Plug>(easymotion-overwin-f2)
+if g:load_plugins
+    nnoremap gs <Plug>(easymotion-overwin-f2)
+endif
 
 "----------------------------------------------
-" alignment
+" plugin key map
 "----------------------------------------------
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-vnoremap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nnoremap ga <Plug>(EasyAlign)
+if g:load_plugins
+    " vim-easy-align
+    nnoremap ga <Plug>(EasyAlign)
+    vnoremap ga <Plug>(EasyAlign)
 
+    " AsyncRun
+    nnoremap <Leader>r :AsyncRun<Space>
+endif
