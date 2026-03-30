@@ -17,6 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- Colorscheme
     { "oskarnurm/koda.nvim", lazy = false, priority = 1000 },
+    { 'olivercederborg/poimandres.nvim', lazy = false, priority = 1000, },
+    { 'whatyouhide/vim-gotham' },
 
     -- Auto completion
     {

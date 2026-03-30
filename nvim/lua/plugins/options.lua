@@ -138,11 +138,12 @@ cmp.setup.cmdline(":", {
 })
 
 -- lualine
-require("lualine").setup{
-    options = {
-        theme = 'auto',
-    }
-}
+require("lualine").hide()
+-- require("lualine").setup{
+--     options = {
+--         theme = 'auto',
+--     }
+-- }
 
 -- asyncrun
 local os = vim.loop.os_uname().sysname

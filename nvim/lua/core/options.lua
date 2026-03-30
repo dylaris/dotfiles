@@ -17,8 +17,8 @@ end
 -- =================================
 vim.opt.background = "dark"                 -- Background color
 vim.opt.termguicolors = true                -- True color support
-vim.opt.laststatus = 2                      -- Show the status line or not
-vim.cmd("colorscheme koda")
+vim.opt.laststatus = 1                      -- Show the status line or not
+vim.cmd("colorscheme koda-moss")
 vim.cmd("highlight CursorLine guibg=none")
 vim.cmd("highlight CursorLineNr guibg=none")
 vim.opt.guicursor = {
@@ -96,4 +96,4 @@ vim.opt.relativenumber = true              -- Show relative line numbers
 vim.opt.belloff = "all"                     -- Disable bell
 vim.opt.updatetime = 300                    -- Shorter update time for better responsiveness
 vim.opt.mouse = "a"                         -- Mouse support in all modes
-vim.opt.showmode = false                    -- Show current mode
+vim.opt.showmode = true                     -- Show current mode
