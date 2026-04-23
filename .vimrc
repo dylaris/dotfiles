@@ -286,8 +286,6 @@ nnoremap <leader>bp :redir @+ <bar> echo expand('%:p') <bar> redir END<CR>
 nnoremap <Leader>bt :call CreateTempBuffer()<CR>
 " Edit vimrc
 nnoremap <Leader>br :e! $MYVIMRC<CR>
-" Show file path
-nnoremap <Leader>bp :echo expand('%:p')<CR>
 
 "----------------------------------------------
 " window operations
@@ -297,9 +295,19 @@ nnoremap <Leader>wh :split<CR>
 " Vertical split window
 nnoremap <Leader>wv :vsplit<CR>
 " Close window
-nnoremap <Leader>wc :close<CR>
+nnoremap <Leader>wd :close<CR>
 " Close other windows
 nnoremap <Leader>wo :only<CR>
+
+"----------------------------------------------
+" tab operations
+"----------------------------------------------
+" Create a new tab
+nnoremap <Leader>tn :tabnew<CR>
+" Close window
+nnoremap <Leader>td :tabclose<CR>
+" Close other abs
+nnoremap <Leader>to :tabonly<CR>
 
 "----------------------------------------------
 " navigation

@@ -36,13 +36,19 @@ vim.keymap.set("n", "<leader>bu", ":bun<cr>", {desc = "Unload buffer"})
 vim.keymap.set("n", "<leader>bv", ":b#<cr>", {desc = "Switch to last visited buffer"})
 vim.keymap.set("n", "<leader>bp", ":redir @+ | echo expand('%:p') | redir end<cr>", {desc = "Show buffer path"})
 vim.keymap.set("n", "<leader>bt", create_temp_buffer, {desc = "Create temp buffer"})
+vim.keymap.set("n", "<leader>bn", "enew", {desc = "Create a new buffer"})
 vim.keymap.set("n", "<leader>bo", close_other_buffers, {desc = "Close other buffers"})
 
 -- window operations
 vim.keymap.set("n", "<leader>wh", ":split<cr>", {desc = "Horizontal split window"})
 vim.keymap.set("n", "<leader>wv", ":vsplit<cr>", {desc = "Vertical split window"})
-vim.keymap.set("n", "<leader>wc", ":close<cr>", {desc = "Close window"})
+vim.keymap.set("n", "<leader>wd", ":close<cr>", {desc = "Close window"})
 vim.keymap.set("n", "<leader>wo", ":only<cr>", {desc = "Close other windows"})
+
+-- tab operations
+vim.keymap.set("n", "<leader>td", ":tabclose<cr>", {desc = "Close tab"})
+vim.keymap.set("n", "<leader>to", ":tabonly<cr>", {desc = "Close other tabs"})
+vim.keymap.set("n", "<leader>tn", ":tabnew<cr>", {desc = "Create a new tab"})
 
 -- navigation
 vim.keymap.set("n", "gi", function()
@@ -65,6 +71,8 @@ vim.keymap.set("n", "<A-h>", "<C-w>wh", {desc = "Go to left window"})
 vim.keymap.set("n", "<A-l>", "<C-w>wl", {desc = "Go to right window"})
 vim.keymap.set("n", "<A-k>", "<C-w>wk", {desc = "Go to up window"})
 vim.keymap.set("n", "<A-j>", "<C-w>wj", {desc = "Go to down window"})
+vim.keymap.set("n", "<A-n>", ":tabnext<cr>", {desc = "Go to next tab"})
+vim.keymap.set("n", "<A-p>", ":tabprevious<cr>", {desc = "Go to previous tab"})
 
 -- ====== native useful command ======
 -- gg: Go to first line of file

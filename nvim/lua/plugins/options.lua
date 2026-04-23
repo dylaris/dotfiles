@@ -150,3 +150,18 @@ local os = vim.loop.os_uname().sysname
 if os == "Windows_NT" then
     vim.g.asyncrun_encs = 'gbk'
 end
+
+require("koda").setup{
+    on_highlights = function(hl, c)
+        hl.LineNr = { fg = "#707070" }
+    end,
+    styles = {
+        functions = { bold = false }
+    },
+    colors = {
+        -- comment = "#c98f6a",
+        -- bg = "#0e1415",
+        string = "#8FD8A3",
+        char = "#8FD8A3",
+    },
+}

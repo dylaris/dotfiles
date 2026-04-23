@@ -18,7 +18,7 @@ end
 vim.opt.background = "dark"                 -- Background color
 vim.opt.termguicolors = true                -- True color support
 vim.opt.laststatus = 1                      -- Show the status line or not
-vim.cmd("colorscheme koda-moss")
+vim.cmd("colorscheme koda")
 vim.cmd("highlight CursorLine guibg=none")
 vim.cmd("highlight CursorLineNr guibg=none")
 vim.opt.guicursor = {
@@ -72,7 +72,7 @@ if os == "Windows_NT" then
     table.insert(paths, "C:\\Users\\Aris\\AppData\\Local\\nvim\\**")
 else
     table.insert(paths, "~/.config/nvim/**")
-    table.insert(paths, "~/programming/thirdparty/symlinks/")
+    table.insert(paths, "~/src/lua-5.5.0/src")
 end
 
 local path_str = ""
