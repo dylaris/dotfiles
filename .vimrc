@@ -327,6 +327,12 @@ vnoremap <C-h> ^
 nnoremap <C-l> $
 " Go to line end (no newline)
 vnoremap <C-l> $h
+" Go to previous function/class
+nnoremap <C-p> [[
+vnoremap <C-p> [[
+" Go to next function/class
+nnoremap <C-n> ]]
+vnoremap <C-n> ]]
 " Go to previous paragraph
 nnoremap <C-k> {
 vnoremap <C-k> {

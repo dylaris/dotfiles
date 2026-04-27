@@ -18,12 +18,10 @@ end
 vim.opt.background = "dark"                 -- Background color
 vim.opt.termguicolors = true                -- True color support
 vim.opt.laststatus = 1                      -- Show the status line or not
-vim.cmd("colorscheme koda")
-vim.cmd("highlight CursorLine guibg=none")
-vim.cmd("highlight CursorLineNr guibg=none")
+vim.cmd("set guifont=Inconsolata\\ LGC\\ Nerd\\ Font:h9:b")
 vim.opt.guicursor = {
     "n-v-sm:block",
-    "i-c-ci-ve:hor20",
+    "i-c-ci-ve:ver25",
     "r-cr-o:hor20"
     -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 }
@@ -72,7 +70,8 @@ if os == "Windows_NT" then
     table.insert(paths, "C:\\Users\\Aris\\AppData\\Local\\nvim\\**")
 else
     table.insert(paths, "~/.config/nvim/**")
-    table.insert(paths, "~/src/lua-5.5.0/src")
+    table.insert(paths, "~/lib/nob.h/")
+    table.insert(paths, "~/lib/clay/")
 end
 
 local path_str = ""

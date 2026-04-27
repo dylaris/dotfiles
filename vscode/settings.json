@@ -44,8 +44,24 @@
             "commands": [ ":nohl" ]
         },
         {
-            "before": [ "<enter>" ],
+            "before": [ "C-m" ],
             "after": [ "i", "<cr>", "<esc>" ]
+        },
+        {
+            "before": [ "C-p" ],
+            "after": [ "[", "[" ]
+        },
+        {
+            "before": [ "C-n" ],
+            "after": [ "]", "]" ]
+        },
+        {
+            "before": [ "C-k" ],
+            "after": [ "{" ]
+        },
+        {
+            "before": [ "C-j" ],
+            "after": [ "}" ]
         },
         {
             "before": [ "C-h" ],
@@ -56,7 +72,7 @@
             "after": [ "$" ]
         },
         {
-            "before": ["g", "h"],  
+            "before": ["g", "h"],
             "commands": [ "editor.action.showHover"]
         },
         {
@@ -80,7 +96,7 @@
             "commands": ["workbench.explorer.fileView.focus"],
         },
         {
-            "before": ["leader", "c", "p"], 
+            "before": ["leader", "c", "p"],
             "commands": ["editor.action.marker.prevInFiles"],
         },
         {
@@ -89,6 +105,22 @@
         },
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [ "C-p" ],
+            "after": [ "[", "[" ]
+        },
+        {
+            "before": [ "C-n" ],
+            "after": [ "]", "]" ]
+        },
+        {
+            "before": [ "C-k" ],
+            "after": [ "{" ]
+        },
+        {
+            "before": [ "C-j" ],
+            "after": [ "}" ]
+        },
         {
             "before": [ "C-h" ],
             "after": [ "^" ]

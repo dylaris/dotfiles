@@ -52,6 +52,11 @@ vim.keymap.set("n", "<leader>tn", ":tabnew<cr>", {desc = "Create a new tab"})
 
 -- navigation
 vim.keymap.set("n", "gi", function()
+    local pos = vim.api.nvim_buf_get_mark(0, "^")
+    if pos[1] == 0 then
+        vim.notify("No previous insert position", vim.log.levels.ERROR)
+        return
+    end
     vim.cmd('normal! m`')
     vim.cmd('normal! `^')
 end, { desc = 'Go to last insert (with jump history)' })
@@ -62,8 +67,8 @@ vim.keymap.set("n", "<C-h>", "^", {desc = "Go to line start"})
 vim.keymap.set("v", "<C-h>", "^", {desc = "Go to line start"})
 vim.keymap.set("n", "<C-l>", "$", {desc = "Go to line end"})
 vim.keymap.set("v", "<C-l>", "$h", {desc = "Go to line end (no newline)"})
--- vim.keymap.set({"n", "v"}, "<C-p>", "[m", {desc = "Go to previous method"})
--- vim.keymap.set({"n", "v"}, "<C-n>", "]m", {desc = "Go to next method"})
+vim.keymap.set({"n", "v"}, "<C-p>", "[[", {desc = "Go to previous function/class"})
+vim.keymap.set({"n", "v"}, "<C-n>", "]]", {desc = "Go to next function/class"})
 vim.keymap.set({"n", "v"}, "<C-k>", "{", {desc = "Go to previous paragraph"})
 vim.keymap.set({"n", "v"}, "<C-j>", "}", {desc = "Go to next paragraph"})
 vim.keymap.set({"n", "v"}, "<space><space>", "%", {desc = "Go to matching bracket"})
@@ -74,38 +79,3 @@ vim.keymap.set("n", "<A-j>", "<C-w>wj", {desc = "Go to down window"})
 vim.keymap.set("n", "<A-n>", ":tabnext<cr>", {desc = "Go to next tab"})
 vim.keymap.set("n", "<A-p>", ":tabprevious<cr>", {desc = "Go to previous tab"})
 
--- ====== native useful command ======
--- gg: Go to first line of file
--- G: Go to last line of file (Shift+g)
-
--- m{register}: Mark at current position (:marks to see all marks)
--- 'register}: Go to mark line
--- `{register}: Go to exact mark position
--- g;: Go to older change in changelist
--- g,: Go to newer change in changelist
--- gi: Go to last insertion point and enter insert mode
-
--- gd: Go to local definition (current file)
--- gD: Go to global definition (across files)
--- gf: Open file under cursor
--- gF: Open file:line under cursor
-
--- gu: Make lowercase (operator, e.g., guw for word)
--- gU: Make uppercase (operator, e.g., gUw for word)
--- g~: Toggle case (operator, e.g., g~w for word)
--- guu: Make current line lowercase
--- gUU: Make current line uppercase
--- g~~: Toggle case of current line
-
--- gv: Reselect last visual selection
-
--- ga: Show ASCII/Unicode value of character under cursor
--- g8: Show UTF-8 byte sequence of character under cursor
--- gCtrl+g: Show detailed file/position information
--- g<: Show older command-line history
--- g>: Show newer command-line history
-
--- gx: Open URL under cursor with default application
-
--- gt: Go to next tab
--- gT: Go to previous tab
