@@ -15,11 +15,11 @@ vim.keymap.set("v", "<tab>", ":normal @a<cr>", {desc = "Run macro 'a'"})
 -- line operations
 vim.keymap.set("n", "du", "d^", {desc = "Delete to line start"})
 vim.keymap.set("n", "<enter>", function()
-    if vim.bo.modifiable and not vim.bo.readonly then
-        return "i<cr><esc>"
-    else
-        return "<cr>"
-    end
+  if vim.bo.modifiable and not vim.bo.readonly then
+    return "i<cr><esc>"
+  else
+    return "<cr>"
+  end
 end, {expr = true})
 
 -- quickfix
@@ -52,13 +52,13 @@ vim.keymap.set("n", "<leader>tn", ":tabnew<cr>", {desc = "Create a new tab"})
 
 -- navigation
 vim.keymap.set("n", "gi", function()
-    local pos = vim.api.nvim_buf_get_mark(0, "^")
-    if pos[1] == 0 then
-        vim.notify("No previous insert position", vim.log.levels.ERROR)
-        return
-    end
-    vim.cmd('normal! m`')
-    vim.cmd('normal! `^')
+  local pos = vim.api.nvim_buf_get_mark(0, "^")
+  if pos[1] == 0 then
+    vim.notify("No previous insert position", vim.log.levels.ERROR)
+    return
+  end
+  vim.cmd('normal! m`')
+  vim.cmd('normal! `^')
 end, { desc = 'Go to last insert (with jump history)' })
 vim.keymap.set("n", "gj", "<C-]>", {desc = "Go to definition (tag)"})
 vim.keymap.set("n", "gb", "<C-t>", {desc = "Go back from tag (tag stack)"})
