@@ -8,7 +8,15 @@ return {
       highlight_overrides = {
         CursorLine = { bg = "#000000" },
         CursorLineNr = { bg = "#000000" }
-      }
+      },
+      styles = {
+          comments = { italic = true },
+          keywords = { italic = true },
+          identifiers = {},
+          functions = { },
+          variables = {},
+          booleans = { italic = true },
+      },
     }
     vim.cmd("colorscheme oldworld")
   end

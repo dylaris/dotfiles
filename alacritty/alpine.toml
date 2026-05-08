@@ -1,16 +1,11 @@
-general.import = ["koda_dark.toml"]
+general.import = ["oldworld.toml"]
 
 [font]
-size = 10.0
-# normal = { family = "BlexMono Nerd Font", style = "Bold" }
-# bold   = { family = "BlexMono Nerd Font", style = "Bold" }
-# italic = { family = "BlexMono Nerd Font", style = "Italic" }
+size = 8.0
 normal = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
 bold   = { family = "Inconsolata LGC Nerd Font", style = "Bold" }
-italic = { family = "Inconsolata LGC Nerd Font", style = "Italic" }
-# normal = { family = "Maple Mono NF CN", style = "SemiBold" }
-# bold   = { family = "Maple Mono NF CN", style = "Bold" }
-# italic = { family = "Maple Mono NF CN", style = "Italic" }
+# italic = { family = "Inconsolata LGC Nerd Font", style = "Italic" }
+italic = { family = "VictorMono NFM", style = "Bold Italic" }
 
 [window]
 decorations = "Full"
