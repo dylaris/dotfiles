@@ -13,11 +13,11 @@ return {
           comments = { italic = true },
           keywords = { italic = true },
           identifiers = {},
-          functions = { },
+          functions = {},
           variables = {},
           booleans = { italic = true },
       },
     }
-    vim.cmd("colorscheme oldworld")
+    -- vim.cmd("colorscheme oldworld")
   end
 }
