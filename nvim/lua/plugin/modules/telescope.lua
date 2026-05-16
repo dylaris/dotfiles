@@ -30,6 +30,8 @@ return {
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+    vim.keymap.set('n', '<leader>fm', builtin.marks, { desc = 'Telescope marks' })
+    vim.keymap.set('n', '<leader>fj', builtin.jumplist, { desc = 'Telescope jumplist' })
     vim.keymap.set('n', '<leader>ff', function()
       local is_windows = vim.fn.has('win32') == 1
       local paths = { vim.fn.getcwd() }

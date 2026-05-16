@@ -19,7 +19,8 @@ vim.opt.background = "dark"         -- Background color
 vim.opt.termguicolors = true        -- True color support
 vim.opt.laststatus = 1              -- Show the status line or not
 if vim.fn.has("gui_running") == 1 then
-  vim.opt.guifont = "Iosevka NF:h11:i"
+  -- vim.opt.guifont = "SFMono Nerd Font:h9"
+  vim.opt.guifont = "Inconsolata LGC Nerd Font:h9:b"
   vim.opt.guicursor = {
     "n-v-sm:block",
     "i-c-ci-ve:hor10",
