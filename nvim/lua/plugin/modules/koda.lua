@@ -6,7 +6,8 @@ return {
     require("koda").setup{
       on_highlights = function(hl, c)
         hl.CursorLine = { bg = "NONE" }
-        hl.CursorLineNr = { fg = "#8fd8a3" }
+        -- hl.CursorLineNr = { fg = "#8fd8a3" }
+        hl.CursorLineNr = { fg = "#5de4c7" }
         hl.LineNr = { fg = "#50585d" }
         hl.Search = { bg = "#A6ACCD", fg = "#000000" }
         hl.CurSearch = { bg = "#5de4c7", fg = "#000000" }
