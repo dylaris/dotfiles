@@ -21,7 +21,7 @@ vim.opt.laststatus = 1              -- Show the status line or not
 if vim.fn.has("gui_running") == 1 then
   -- vim.opt.guifont = "SFMono Nerd Font:h9"
   vim.opt.guifont = "Inconsolata LGC Nerd Font:h9:b"
-  vim.opt.guicursor = {
+  vim.opt.guikursor = {
     "n-v-sm:block",
     "i-c-ci-ve:hor10",
     "r-cr-o:hor10"
@@ -29,7 +29,7 @@ if vim.fn.has("gui_running") == 1 then
   }
 else
   vim.opt.guicursor = {
-    "n-v-sm:block",
+    "n-v-sm:block-Cursor",
     "i-c-ci-ve:hor20",
     "r-cr-o:hor20"
     -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
@@ -67,8 +67,8 @@ vim.opt.undofile = false          -- Undo files
 -- Line
 -- ====
 vim.opt.cursorline = true        -- Highlight cursor line
-vim.opt.number = true            -- Show absolute line numbers
-vim.opt.relativenumber = true    -- Show relative line numbers
+vim.opt.number = false           -- Show absolute line numbers
+vim.opt.relativenumber = false   -- Show relative line numbers
 
 -- ==============
 -- Other settings

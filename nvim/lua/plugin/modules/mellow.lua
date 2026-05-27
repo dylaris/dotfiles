@@ -6,6 +6,6 @@ return {
       ["Function"] = { fg = "#f5a191" },
       ["@variable.member"] = { fg = "#85b5ba" }
     }
-    vim.cmd("colorscheme mellow")
+    -- vim.cmd("colorscheme mellow")
   end
 }

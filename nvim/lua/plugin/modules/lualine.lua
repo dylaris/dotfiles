@@ -4,11 +4,11 @@ return {
     { "nvim-mini/mini.icons", opts = {} },
   },
   config = function()
-    -- require("lualine").hide()
-    require("lualine").setup{
-      options = {
-        theme = 'auto',
-      }
-    }
+    require("lualine").hide()
+    -- require("lualine").setup{
+    --   options = {
+    --     theme = 'koda',
+    --   }
+    -- }
   end,
 }
