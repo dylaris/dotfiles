@@ -10,6 +10,8 @@ vim.api.nvim_create_autocmd("FileType", {
       javascript = 2,
       typescript = 2,
       vim = 2,
+      sh = 2,
+      json = 2,
     }
     local width = indent_configs[vim.bo.filetype] or 4
     vim.opt_local.tabstop = width
