@@ -31,8 +31,6 @@ return {
 
       -- internal key map
       keymaps = {
-        ["<C-h>"] = false,
-        ["<C-l>"] = false,
         ["<C-p>"] = "actions.preview",        -- preview file content
         ["J"] = { "actions.select", mode = "n" },   -- open file or enter directory
         ["K"] = { "actions.parent", mode = "n" },   -- go back to parent directory

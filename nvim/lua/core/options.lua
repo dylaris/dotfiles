@@ -5,33 +5,44 @@ vim.opt.compatible = false          -- Vi compatibility
 vim.opt.syntax = "on"               -- Syntax highlighting
 vim.cmd("filetype on")              -- Filetype detection
 vim.cmd("filetype indent on")       -- Auto indentation
-local os = vim.loop.os_uname().sysname
-if os == "Windows_NT" then
-  vim.opt.fileformats = "dos"
+if vim.fn.has("win32") == 1 then
+  vim.opt.shell = "ash"
+  vim.opt.fileformat = "dos"
 else
-  vim.opt.fileformats = "unix"
+  vim.opt.fileformat = "unix"
 end
 
 -- =================================
 -- Appearance and interface settings
 -- =================================
+vim.opt.signcolumn = "yes"
 vim.opt.background = "dark"         -- Background color
 vim.opt.termguicolors = true        -- True color support
 vim.opt.laststatus = 1              -- Show the status line or not
 if vim.fn.has("gui_running") == 1 then
-  -- vim.opt.guifont = "SFMono Nerd Font:h9"
-  vim.opt.guifont = "Inconsolata LGC Nerd Font:h9:b"
-  vim.opt.guikursor = {
-    "n-v-sm:block",
-    "i-c-ci-ve:hor10",
-    "r-cr-o:hor10"
+  vim.opt.guifont = "Inconsolata LGC Nerd Font:h7:b"
+  vim.opt.guicursor = {
+    "n-v-sm:block-Cursor",
+    "i-c-ci-ve:hor10-Cursor",
+    "r-cr-o:hor10-Cursor",
+    "t:ver20-Cursor",
     -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
   }
+  if vim.g.neovide then
+    vim.g.neovide_cursor_vfx_mode = "pixiedust"
+    vim.g.neovide_no_idle = true
+    vim.g.neovide_title_background_color = "#0e1415"
+    vim.g.neovide_cursor_animation_length = 0.06
+    vim.g.neovide_cursor_short_animation_length = 0.04
+    vim.g.neovide_scroll_animation_length = 0.1
+    vim.g.neovide_cursor_trail_size = 1
+  end
 else
   vim.opt.guicursor = {
     "n-v-sm:block-Cursor",
-    "i-c-ci-ve:hor20",
-    "r-cr-o:hor20"
+    "i-c-ci-ve:hor20-Cursor",
+    "r-cr-o:hor20-Cursor",
+    "t:hor20-Cursor",
     -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
   }
 end
@@ -67,8 +78,8 @@ vim.opt.undofile = false          -- Undo files
 -- Line
 -- ====
 vim.opt.cursorline = true        -- Highlight cursor line
-vim.opt.number = false           -- Show absolute line numbers
-vim.opt.relativenumber = false   -- Show relative line numbers
+vim.opt.number = true            -- Show absolute line numbers
+vim.opt.relativenumber = true    -- Show relative line numbers
 
 -- ==============
 -- Other settings

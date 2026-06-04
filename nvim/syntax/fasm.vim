@@ -197,8 +197,10 @@ hi def link fasmLabel           Underlined
 hi def link fasmSymbol          Structure
 hi def link fasmSpecial         Special
 hi def link fasmMacros          Identifier
-hi def link fasmDirective       PreProc
-hi def link fasmDataDirectives  rubyDefine
+" hi def link fasmDirective       PreProc
+" hi def link fasmDataDirectives  rubyDefine
+hi def link fasmDirective       Keyword
+hi def link fasmDataDirectives  Keyword
 
 let b:current_syntax = "fasm"
 

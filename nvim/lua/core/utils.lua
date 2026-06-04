@@ -1,3 +1,7 @@
+--=============================
+-- Text
+--=============================
+
 function get_visual_selection()
   -- store v register
   local saved_register = vim.fn.getreg('v')
@@ -13,22 +17,38 @@ function get_visual_selection()
   return selection
 end
 
-function create_temp_buffer()
-  vim.cmd("botright vnew")
-  local buf = vim.api.nvim_get_current_buf()
+--=============================
+-- Buffer
+--=============================
 
-  vim.bo[buf].buftype = "nofile" -- no associated file
-  vim.bo[buf].bufhidden = "wipe" -- auto delete when hidden
-  vim.bo[buf].swapfile = false -- do not create a swap file
-  vim.bo[buf].filetype = "text" -- set file type
+function open_buffer_in_win(direction, scratch)
+  scratch = scratch or false
+  direction = direction or "down"
+  local split_cmd = {
+    left = 'vsplit',
+    right = 'vsplit',
+    up = 'split',
+    down = 'split'
+  }
 
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {
-    "This is a temporary buffer...",
-    "You can write anything here...",
-    "",
-  })
+  vim.cmd(split_cmd[direction])
 
-  return buf
+  if direction == 'right' then
+    vim.cmd('wincmd l')
+  elseif direction == 'down' then
+    vim.cmd('wincmd j')
+  end
+
+  vim.cmd('enew')
+
+  if scratch then
+    vim.opt_local.buftype = 'nofile'
+    vim.opt_local.bufhidden = 'hide'
+    vim.opt_local.swapfile = false
+  end
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  print("Opened new buffer: " .. bufnr)
 end
 
 function close_other_buffers()
@@ -39,6 +59,178 @@ function close_other_buffers()
     end
   end
 end
+
+--=============================
+-- Term
+--=============================
+
+local terminals = {}
+local max_terminals = 5
+local fruit_names = {"apple", "banana", "orange", "grape", "pair"}
+
+local function get_next_name()
+  for _, fruit in ipairs(fruit_names) do
+    local name = "term-" .. fruit
+    if not terminals[name] then
+      return name
+    end
+  end
+  return nil
+end
+
+local function get_count()
+  local count = 0
+  for name, term in pairs(terminals) do
+    if vim.api.nvim_buf_is_valid(term.bufnr) then
+      count = count + 1
+    else
+      terminals[name] = nil
+    end
+  end
+  return count
+end
+
+function open_term_in_tab()
+  if get_count() >= max_terminals then
+    print("Max terminals reached (" .. max_terminals .. ")")
+    return
+  end
+
+  local name = get_next_name()
+  if not name then
+    print("No available names")
+    return
+  end
+
+  vim.cmd('tabnew')
+  vim.cmd('term')
+  -- vim.cmd('startinsert')
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  terminals[name] = {
+    name = name,
+    bufnr = bufnr,
+    type = "tab"
+  }
+  vim.api.nvim_buf_set_name(bufnr, name)
+  print("Opened: " .. name)
+end
+
+function open_term_in_win(direction)
+  if get_count() >= max_terminals then
+    print("Max terminals reached (" .. max_terminals .. ")")
+    return
+  end
+
+  local name = get_next_name()
+  if not name then
+    print("No available names")
+    return
+  end
+
+  direction = direction or "down"
+  local split_cmd = {
+    left = 'vsplit',
+    right = 'vsplit',
+    up = 'split',
+    down = 'split'
+  }
+
+  vim.cmd(split_cmd[direction])
+
+  if direction == 'right' then
+    vim.cmd('wincmd l')
+  elseif direction == 'down' then
+    vim.cmd('wincmd j')
+  end
+
+  vim.cmd('term')
+  -- vim.cmd('startinsert')
+
+  local bufnr = vim.api.nvim_get_current_buf()
+  terminals[name] = {
+    name = name,
+    bufnr = bufnr,
+    type = "win"
+  }
+  vim.api.nvim_buf_set_name(bufnr, name)
+  print("Opened: " .. name)
+end
+
+function close_terminal()
+  local current_buf = vim.api.nvim_get_current_buf()
+
+  for name, term in pairs(terminals) do
+    if term.bufnr == current_buf then
+      vim.api.nvim_buf_delete(term.bufnr, { force = true })
+      terminals[name] = nil
+      print("Closed: " .. name)
+      return
+    end
+  end
+
+  print("Current buffer is not a terminal")
+end
+
+function close_all_terminals()
+  local count = 0
+  for name, term in pairs(terminals) do
+    if vim.api.nvim_buf_is_valid(term.bufnr) then
+      vim.api.nvim_buf_delete(term.bufnr, { force = true })
+      count = count + 1
+    end
+    terminals[name] = nil
+  end
+  if count > 0 then
+    print("Closed " .. count .. " terminal(s)")
+  else
+    print("No terminals to close")
+  end
+end
+
+function only_terminal()
+  local current_buf = vim.api.nvim_get_current_buf()
+
+  local is_terminal = false
+  for name, term in pairs(terminals) do
+    if term.bufnr == current_buf then
+      is_terminal = true
+      break
+    end
+  end
+
+  if not is_terminal then
+    vim.notify("Current buffer is not a terminal", vim.log.levels.WARN)
+    return
+  end
+
+  local kept_name = nil
+  local closed = 0
+
+  for name, term in pairs(terminals) do
+    if vim.api.nvim_buf_is_valid(term.bufnr) then
+      if term.bufnr == current_buf then
+        kept_name = name
+      else
+        vim.api.nvim_buf_delete(term.bufnr, { force = true })
+        terminals[name] = nil
+        closed = closed + 1
+      end
+    else
+      terminals[name] = nil
+    end
+  end
+
+  if closed > 0 then
+    print("Closed " .. closed .. " terminal(s), kept: " .. (kept_name or "current"))
+  elseif kept_name then
+    print("Only terminal: " .. kept_name)
+  end
+end
+
+--=============================
+-- Other
+--=============================
 
 function parse_error_report()
   local selection = get_visual_selection()
@@ -84,3 +276,4 @@ function print_plus(v)
   print(vim.inspect(v))
   return v
 end
+
