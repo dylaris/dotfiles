@@ -54,5 +54,70 @@
         "key": "escape",
         "command": "workbench.action.focusFirstEditorGroup",
         "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+    },
+
+    {   // Focus left window
+        "key": "alt+h",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["<c-w>", "h"]
+        }
+    },
+    {   // Focus right window
+        "key": "alt+l",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["<c-w>", "l"]
+        }
+    },
+    {   // Focus down window
+        "key": "alt+j",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["<c-w>", "j"]
+        }
+    },
+    {   // Focus up window
+        "key": "alt+k",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["<c-w>", "k"]
+        }
+    },
+    {   // Focus next tab
+        "key": "alt+n",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["g", "t"]
+        }
+    },
+    {   // Focus previous tab
+        "key": "alt+p",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal'",
+        "args": {
+            "after": ["g", "T"]
+        }
+    },
+    {   // Quick move down
+        "key": "ctrl+j",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine'",
+        "args": {
+            "after": ["5", "j"]
+        }
+    },
+    {   // Quick move up
+        "key": "ctrl+k",
+        "command": "vim.remap",
+        "when": "vim.mode == 'Normal' || vim.mode == 'Visual' || vim.mode == 'VisualLine'",
+        "args": {
+            "after": ["5", "k"]
+        }
     }
 ]
