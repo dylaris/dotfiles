@@ -3,6 +3,7 @@
     "remote.SSH.remotePlatform": {
         "192.168.2.149": "linux"
     },
+
     // vim
     "vim.easymotion": true,
     "vim.incsearch": true,
@@ -12,7 +13,7 @@
     "vim.leader": "<space>",
     "vim.handleKeys": {
         "<C-p>": false,
-        "<C-a>": false,
+        "<C-a>": true,
         "<C-f>": true,
         "<C-b>": true,
         "<C-d>": true,
@@ -28,9 +29,61 @@
         {
             "before": [ "j", "k" ],
             "after": [ "<cr>" ]
+        },
+        {
+            "before": [ "j", "j" ],
+            "after": [ "<C-c>" ]
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["y", "h"],
+            "after": ["y", "^"]
+        },
+        {
+            "before": ["y", "l"],
+            "after": ["y", "$"]
+        },
+        {
+            "before": ["c", "h"],
+            "after": ["c", "^"]
+        },
+        {
+            "before": ["c", "l"],
+            "after": ["C"]
+        },
+        {
+            "before": ["d", "h"],
+            "after": ["d", "^"]
+        },
+        {
+            "before": ["d", "l"],
+            "after": ["D"]
+        },
+        {
+            "before": ["<leader>", "w", "h"],
+            "commands": [":split"]
+        },
+        {
+            "before": ["<leader>", "w", "v"],
+            "commands": [":vsplit"]
+        },
+        {
+            "before": ["<leader>", "w", "d"],
+            "commands" : [":close"],
+        },
+        {
+            "before": ["<leader>", "f", "b"],
+            "commands": [":ls"]
+        },
+        {
+            "before": ["<leader>", "f", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["<leader>", "f", "g"],
+            "commands": ["workbench.view.search"],
+        },
         {
             "before": [ "<leader>", "s" ],
             "commands": [ ":w" ]
@@ -44,35 +97,23 @@
             "commands": [ ":nohl" ]
         },
         {
-            "before": [ "C-m" ],
+            "before": [ "<enter>" ],
             "after": [ "i", "<cr>", "<esc>" ]
         },
         {
-            "before": [ "C-p" ],
-            "after": [ "[", "[" ]
-        },
-        {
-            "before": [ "C-n" ],
-            "after": [ "]", "]" ]
-        },
-        {
-            "before": [ "C-k" ],
-            "after": [ "{" ]
-        },
-        {
-            "before": [ "C-j" ],
-            "after": [ "}" ]
-        },
-        {
-            "before": [ "C-h" ],
+            "before": [ "g", "h" ],
             "after": [ "^" ]
         },
         {
-            "before": [ "C-l" ],
+            "before": [ "g", "l" ],
             "after": [ "$" ]
         },
         {
-            "before": ["g", "h"],
+            "before": [ "g", "m" ],
+            "after": [ "%" ]
+        },
+        {
+            "before": ["K"],  
             "commands": [ "editor.action.showHover"]
         },
         {
@@ -84,19 +125,15 @@
             "commands": ["editor.action.revealDefinition"]
         },
         {
-            "before": ["g", "b"],
+            "before": ["g", "k"],
             "commands": ["workbench.action.navigateBack"],
-        },
-        {
-            "before": ["g", "s"],
-            "commands": ["workbench.view.search"],
         },
         {
             "before": ["leader", "e"],
             "commands": ["workbench.explorer.fileView.focus"],
         },
         {
-            "before": ["leader", "c", "p"],
+            "before": ["leader", "c", "p"], 
             "commands": ["editor.action.marker.prevInFiles"],
         },
         {
@@ -106,28 +143,16 @@
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": [ "C-p" ],
-            "after": [ "[", "[" ]
-        },
-        {
-            "before": [ "C-n" ],
-            "after": [ "]", "]" ]
-        },
-        {
-            "before": [ "C-k" ],
-            "after": [ "{" ]
-        },
-        {
-            "before": [ "C-j" ],
-            "after": [ "}" ]
-        },
-        {
-            "before": [ "C-h" ],
+            "before": [ "g", "h" ],
             "after": [ "^" ]
         },
         {
-            "before": [ "C-l" ],
+            "before": [ "g", "l" ],
             "after": [ "$", "h" ]
+        },
+        {
+            "before": [ "g", "m" ],
+            "after": [ "%" ]
         },
         {
             "before": [ "<tab>" ],
@@ -137,7 +162,7 @@
 
     // extension
     "extensions.experimental.affinity": {
-        "vscodevim.vim": 1
+        "vscodevim.vim": 1,
     },
     "extensions.ignoreRecommendations": true,
 
@@ -145,14 +170,38 @@
     "editor.lineNumbers":"relative",
     "editor.smoothScrolling": true,
     "editor.cursorBlinking": "smooth",
-    "editor.fontFamily": "Consolas",
-    "editor.fontSize": 16,
+    "editor.fontFamily": "LXGW WenKai Mono",
+    "editor.fontSize": 15,
     "editor.fontWeight": "normal",
-
-    // workbench
-    "workbench.colorTheme": "Kanagawa",
-    "workbench.iconTheme": "material-icon-theme",
+    "editor.tokenColorCustomizations": {
+        "[Tokyo Night]": { // or "[Tokyo Night Storm]"
+            "textMateRules": [{
+                "scope": [
+                    "comment",
+                    "storage.modifier"
+                ],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }]
+        }
+    },
+    "editor.renderLineHighlight": "none",
+    "editor.bracketPairColorization.enabled": false,
+    "editor.renderWhitespace": "none",
+    "editor.minimap.renderCharacters": false,
+    "editor.guides.indentation": true,
 
     // other
     "problems.visibility": false,
+    "markdown-preview-enhanced.previewTheme": "atom-dark.css",
+    "workbench.productIconTheme": "icons-carbon",
+    // "window.zoomLevel": 0.5,
+    "catppuccin.accentColor": "lavender",
+    "catppuccin.italicComments": false,
+    "catppuccin.italicKeywords": false,
+    // "workbench.iconTheme": "catppuccin-mocha",
+    "everforest.darkContrast": "hard",
+    "workbench.iconTheme": "quill-icons",
+    "workbench.colorTheme": "Moonlight"
 }
