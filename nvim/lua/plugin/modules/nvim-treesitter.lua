@@ -5,7 +5,7 @@ return {
   build = ":TSUpdate",
   config = function()
     for _, config in pairs(require("nvim-treesitter.parsers").get_parser_configs()) do
-      config.install_info.url = config.install_info.url:gsub("https://github.com/", "https://gh.llkk.cc/https://github.com/")
+      config.install_info.url = config.install_info.url:gsub("https://github.com/", "https://gh.bugdey.us.kg/https://github.com/")
     end
 
     require("nvim-treesitter.configs").setup {
@@ -27,10 +27,7 @@ return {
         end,
         additional_vim_regex_highlighting = false,
       },
-      -- Needed because treesitter highlight turns off autoindent for php files
-      indent = {
-        enable = true,
-      },
+      indent = { enable = false, },
     }
   end,
 }

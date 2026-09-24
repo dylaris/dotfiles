@@ -15,37 +15,34 @@ end
 -- =================================
 -- Appearance and interface settings
 -- =================================
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "no"
 vim.opt.background = "dark"         -- Background color
 vim.opt.termguicolors = true        -- True color support
 vim.opt.laststatus = 1              -- Show the status line or not
+vim.opt.linespace = 2
 if vim.fn.has("gui_running") == 1 then
-  vim.opt.guifont = "Inconsolata LGC Nerd Font:h7:b"
-  vim.opt.guicursor = {
-    "n-v-sm:block-Cursor",
-    "i-c-ci-ve:hor10-Cursor",
-    "r-cr-o:hor10-Cursor",
-    "t:ver20-Cursor",
-    -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-  }
+  -- vim.opt.guifont = "LXGW WenKai Mono:h12:b"
+  vim.opt.guifont = "JetBrains Mono:h11"
   if vim.g.neovide then
     vim.g.neovide_cursor_vfx_mode = "pixiedust"
     vim.g.neovide_no_idle = true
-    vim.g.neovide_title_background_color = "#0e1415"
     vim.g.neovide_cursor_animation_length = 0.06
     vim.g.neovide_cursor_short_animation_length = 0.04
     vim.g.neovide_scroll_animation_length = 0.1
     vim.g.neovide_cursor_trail_size = 1
+    vim.g.neovide_fullscreen = false
+    vim.g.neovide_padding_top = 20
+    vim.g.neovide_padding_bottom = 20
+    vim.g.neovide_padding_right = 20
+    vim.g.neovide_padding_left = 20
   end
-else
-  vim.opt.guicursor = {
-    "n-v-sm:block-Cursor",
-    "i-c-ci-ve:hor20-Cursor",
-    "r-cr-o:hor20-Cursor",
-    "t:hor20-Cursor",
-    -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-  }
 end
+vim.opt.guicursor = {
+  "n-v-sm:block-Cursor",
+  "i-c-ci-ve:block-Cursor",
+  "r-cr-o:block-Cursor",
+  -- default: set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+}
 
 -- =====================================
 -- Clipboard and autocompletion settings
@@ -57,6 +54,10 @@ vim.opt.complete:append("d")        -- Enable auto completion for C/C++ macros
 -- Tab and indentation settings
 -- ============================
 vim.opt.expandtab = true          -- Convert tab to spaces
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.cindent = true
+-- vim.opt.indentexpr = ""
 
 -- ===============
 -- Search settings

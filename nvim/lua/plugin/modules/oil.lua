@@ -15,7 +15,10 @@ return {
       },
 
       -- add border
-      float = { border = "rounded" },
+      float = {
+        border = "rounded",
+        preview_split = "left"
+      },
       confirmation = { border = "rounded" },
       progress = { border = "rounded" },
       ssh = { border = "rounded" },
@@ -42,6 +45,6 @@ return {
       },
     })
 
-    vim.keymap.set("n", "<leader>e", ":Oil --float<cr>")
+    vim.keymap.set("n", "<leader>e", ":Oil ")
   end,
 }

@@ -25,7 +25,7 @@ vim.keymap.set("n", "<enter>", function()
   else
     return "<cr>"
   end
-end, {expr = true, desc = "Insert new line above"})
+end, {expr = true, desc = "Insert new line"})
 -- vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv", {desc = "Move lines down"})
 -- vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv", {desc = "Move lines up"})
 vim.keymap.set("n", "gp", "`[v`]", {desc = "Select text just pasted"})
@@ -62,6 +62,8 @@ vim.keymap.set('n', '<leader>td', close_terminal, {desc = "Close terminal"})
 vim.keymap.set('n', '<leader>tx', close_all_terminals, {desc = "Close all terminals"})
 
 -- navigation
+vim.keymap.set("n", "gj", "<C-]>", {desc = "go in"})
+vim.keymap.set("n", "gk", "<C-t>", {desc = "go out"})
 vim.keymap.set("n", "g.", "'.", {desc = "Last edit"})
 vim.keymap.set("v", "<enter>", "<cmd>JumpToError<cr>", {desc = "Open error"})
 vim.keymap.set("n", "gh", "^", {desc = "Line start"})

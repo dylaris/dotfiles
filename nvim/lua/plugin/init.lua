@@ -18,7 +18,28 @@ require("lazy").setup{
   spec = {
     { import = "plugin.modules" },
   },
+  --[[
   git = {
     url_format = "https://gh.bugdey.us.kg/https://github.com/%s.git"
-  }
+  },
+  --]]
+  --[[
+  ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      require = "🌙",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
+  },
+  --]]
 }
