@@ -52,10 +52,19 @@ endfunction
 " Close all buffers except the current one
 function! CloseOtherBuffers()
     let current_buf = bufnr('%')
+    let targets = []
     for buf in getbufinfo({'buflisted': 1})
-        if buf.bufnr != current_buf && buf.loaded
-            execute 'bdelete' buf.bufnr
+        if buf.bufnr != current_buf
+            call add(targets, buf.bufnr)
         endif
+    endfor
+
+    for bufnr in targets
+        try
+            execute 'bdelete' bufnr
+        catch
+            echo 'Could not delete buffer ' . bufnr
+        endtry
     endfor
 endfunction
 
@@ -82,17 +91,20 @@ if g:load_plugins
     endif
 
     call plug#begin(s:plug_dir)
-        Plug 'junegunn/goyo.vim'
-        Plug 'junegunn/limelight.vim'
         Plug 'sheerun/vim-polyglot'
-        Plug 'rakr/vim-two-firewatch'
         Plug 'junegunn/vim-easy-align'
         Plug 'easymotion/vim-easymotion'
         Plug 'tpope/vim-commentary'
-        Plug 'skywind3000/asyncrun.vim'
-        Plug 'skywind3000/vim-terminal-help'
         Plug 'vim-airline/vim-airline'
         Plug 'preservim/nerdtree'
+        Plug 'wellle/targets.vim'
+        Plug 'tpope/vim-surround'
+        Plug 'mhinz/vim-startify'
+        Plug 'romainl/vim-qf'
+        Plug 'skywind3000/asyncrun.vim'
+        Plug 'skywind3000/vim-auto-popmenu'
+        Plug 'skywind3000/vim-dict'
+        Plug 'rakr/vim-two-firewatch'
     call plug#end()
 endif
 
@@ -100,11 +112,12 @@ endif
 "  03. PLUGIN SETTINGS
 " ============================================================
 if g:load_plugins
-    " asyncrun - run shell commands asynchronously
-    let g:asyncrun_encs = 'gbk'
+    " vim-auto-popmenu
+    let g:apc_enable_ft = {'*':1}
 
     " airline
     let g:airline_theme='twofirewatch'
+    let g:airline#extensions#tabline#enabled = 1
 
     " nerdtree
     let NERDTreeShowLineNumbers=1
@@ -113,14 +126,10 @@ if g:load_plugins
     let NERDTreeIgnore=['\.pyc$', '\~$', '\.swp$']
     let NERDTreeShowBookmarks=1
 
-    " goyo
-    let g:goyo_width = 100
-    let g:goyo_height = '90%'
-    let g:goyo_linenr = 0
-    let g:limelight_conceal_ctermfg = 240
-    let g:limelight_conceal_guifg = '#777777'
-    let g:limelight_default_coefficient = 0.7
-    let g:limelight_paragraph_span = 1
+    " everforest
+    let g:everforest_background = 'hard'
+    let g:everforest_better_performance = 1
+    let g:everforest_ui_contrast = 'high'
 endif
 
 " ============================================================
@@ -157,6 +166,8 @@ endif
 " ============================================================
 "  Core editing behaviour: indentation, search, files.
 " ------------------------------------------------------------
+
+set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
 
 " --- Compatibility & filetype ---
 set nocompatible
@@ -200,8 +211,9 @@ set nospell spelllang=en,cjk
 
 " --- Clipboard & completion ---
 set clipboard=unnamed
-set complete+=d
-
+set cpt=.,k,w,b
+set completeopt=menu,menuone,noselect
+set shortmess+=c
 
 " --- Netrw
 "   gn  - Set the directory under the cursor as root
@@ -236,9 +248,16 @@ set termguicolors
 set laststatus=2
 if g:load_plugins
     colorscheme two-firewatch
+    highlight Function guifg=#1A1A1A
+    let matchparen_disable_cursor_hl = 1
+    hi MatchParen cterm=bold ctermfg=243 ctermbg=253 gui=bold guifg=#6C6C6C guibg=#E8E4DD
 else
     colorscheme quiet
 endif
+
+" set guifont=Fixedsys_Core:h11
+set guifont=Consolas:h11:b
+" set guifont=VictorMono_NFM:h11
 
 " --- Line numbers ---
 set number
@@ -293,11 +312,6 @@ autocmd FileType vim
 
 autocmd! ColorScheme * call <SID>SetCursorLine()
 
-if g:load_plugins
-    autocmd! User GoyoEnter set nocursorline | Limelight
-    autocmd! User GoyoLeave call <SID>SetCursorLine() | Limelight!
-endif
-
 " ============================================================
 "  08. KEYMAPS
 " ============================================================
@@ -315,7 +329,7 @@ nnoremap <Leader>nh :nohl<CR>
 vnoremap <Tab>      :normal @a<CR>
 
 " --- Line operations ---
-nnoremap <expr> <Enter> (&modifiable && !&readonly) ? 'i<CR><Esc>' : '<Enter>'
+nnoremap <expr> <Enter> (&buftype == '' && &modifiable && !&readonly) ? 'i<CR><Esc>' : '<Enter>'
 nnoremap dh :<C-U>normal! dg^<CR>
 nnoremap dl :<C-U>normal! dg$<CR>
 nnoremap ch :<C-U>normal! cg^<CR>
@@ -368,8 +382,8 @@ nnoremap gl g$
 vnoremap gl g$h
 nnoremap gm %
 vnoremap gm %
-nnoremap g] <C-]>
-nnoremap g[ <C-t>
+nnoremap gd <C-]>
+nnoremap gD <C-t>
 
 nnoremap <C-k> 5k
 vnoremap <C-k> 5k
@@ -378,9 +392,6 @@ vnoremap <C-j> 5j
 
 " --- Plugin keymaps ---
 if g:load_plugins
-    " goyo
-    nnoremap <Leader>gy :Goyo<CR>
-
     " nerdtree
     nnoremap <leader>e :NERDTreeToggle<CR>
 
@@ -392,5 +403,5 @@ if g:load_plugins
     vnoremap ga <Plug>(EasyAlign)
 
     " asyncrun
-    nnoremap <Leader>r :AsyncRun<Space>
+    nnoremap <leader>r :AsyncRun<space>
 endif
